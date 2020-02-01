@@ -65,7 +65,7 @@ public abstract class Enemy : MonoBehaviour
     }
     public void death()
     {
-
+        Destroy(this.gameObject);
     }
 }
     

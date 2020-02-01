@@ -97,6 +97,14 @@ public abstract class Tower : MonoBehaviour, IInteractable
         }
     }
 
+    public void EnemyDeath(GameObject deadenemy)
+    {
+        if(myEnemies.Contains(deadenemy))
+        {
+            myEnemies.Remove(deadenemy);
+        }
+    }
+
     virtual  protected void makeBroken()
     {
         this.colorRGB.Set(0, 0, 0);
