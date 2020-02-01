@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
     int dashTimer;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         m_moveDir = Vector2.zero;
@@ -28,7 +27,7 @@ public class Player : MonoBehaviour
         dashTimer = 0;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         // Movement
@@ -36,6 +35,9 @@ public class Player : MonoBehaviour
             m_moveComponent.Move(m_moveDir, dash);
         else
         {
+            // Hardcoded timer for if player has collided with another player,
+            //      they can't do inputs for n frames, allowing the push back 
+            //      force to apply
             dashTimer++;
             if (dashTimer > 20)
             {

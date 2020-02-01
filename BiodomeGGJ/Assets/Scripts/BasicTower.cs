@@ -4,36 +4,29 @@ using UnityEngine;
 
 public class BasicTower : Tower
 {
-    
+
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         base.Start();
         initilize();
-        
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update() 
     {
         base.Update();
     }
+
     protected override void initilize()
     {
-        base.maxammo = 10;
-        base.currentammo = maxammo;
-        base.attacktimemax = 60.0f;
+        base.maxAmmo = 10;
+        base.currentAmmo = maxAmmo;
+        base.attackTimeMax = 60.0f;
         
-        base.attacktimecurrent = attacktimemax;
+        base.attackTimeCurrent = attackTimeMax;
 
         base.damage = 10;
-        
-
-
+    }
 }
-   
-   
-
-}
-

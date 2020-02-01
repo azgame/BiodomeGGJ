@@ -5,76 +5,77 @@ using UnityEngine;
 public abstract class Tower : MonoBehaviour
 {
     // Start is called before the first frame update
-  protected int  maxammo;
-  protected int  currentammo;
+    protected int  maxAmmo;
+    protected int  currentAmmo;
+
     [SerializeField]
-    protected float attacktimemax;
+    protected float attackTimeMax;
     [SerializeField]
-    protected float attacktimecurrent;
+    protected float attackTimeCurrent;
+
     protected int damage;
     public GameObject bullet;
-    public GameObject spawnlocation;
-    protected List<GameObject> myenemies;
+    public GameObject spawnLocation;
+    protected List<GameObject> myEnemies;
     //float ammo;
 
 
-
-
-   virtual  protected void Start()
+    virtual protected void Start()
     {
-        myenemies=new List<GameObject>();
-        myenemies.Clear();
-
+        myEnemies=new List<GameObject>();
+        myEnemies.Clear();
     }
-   virtual  protected void initilize()
+
+    virtual protected void initilize()
     {
 
     }
     
-   virtual  protected void Update()
+    virtual protected void Update()
     {
         
-            if (myenemies.Count != 0)
-            {
-                this.gameObject.transform.LookAt(myenemies[0].transform);
-                attack();
-            }
-        
+         if (myEnemies.Count != 0)
+         {
+            this.gameObject.transform.LookAt(myEnemies[0].transform);
+            attack();
+         }
     }
-   virtual  protected void attack()
+
+    virtual  protected void attack()
     {
-        if (attacktimecurrent <= 0&&currentammo>0)
+        if (attackTimeCurrent <= 0&&currentAmmo>0)
         {
-            Instantiate(bullet,spawnlocation.transform);
-            currentammo--;
-            attacktimecurrent = attacktimemax;
+            Instantiate(bullet,spawnLocation.transform);
+            currentAmmo--;
+            attackTimeCurrent = attackTimeMax;
         }
         else
         {
-            attacktimecurrent--;
+            attackTimeCurrent--;
         }
         
     }
+
     public void OnCollisionEnter(Collision collision)
     {
-       if(collision.gameObject.tag=="Enemy")
+        if(collision.gameObject.tag=="Enemy")
         {
             Debug.Log("enter");
-          myenemies.Add(collision.gameObject);
-            
+            myEnemies.Add(collision.gameObject);
         }
         
-   }
+    }
+
     public void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "Enemy"&&myenemies.Contains(collision.gameObject))
+        if (collision.gameObject.tag == "Enemy" && myEnemies.Contains(collision.gameObject))
         {
             Debug.Log("exit");
-            myenemies.Remove(collision.gameObject);
+            myEnemies.Remove(collision.gameObject);
         }
     }
-  
-   virtual  protected void death()
+
+    virtual  protected void death()
     {
         //die and turn broken etc
     }
