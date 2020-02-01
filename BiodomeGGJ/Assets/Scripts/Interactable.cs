@@ -1,3 +1,4 @@
+using UnityEngine;
 public interface IInteractable //input interface for ACT game
 {
 
@@ -7,7 +8,8 @@ public interface IInteractable //input interface for ACT game
 
     IInteractable activated(IInteractable item);
 
-    void deactivated();
+    // returns true if consumed;
+    bool deactivated();
 
     void consumed();
     InventoryItem getInventoryType();

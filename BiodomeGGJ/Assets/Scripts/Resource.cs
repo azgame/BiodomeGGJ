@@ -9,6 +9,8 @@ public class Resource: MonoBehaviour, IInteractable
     bool isInProximity = false;
     bool isActive = true;
 
+    bool wasConsumed = false;
+
     InventoryItem inventoryType = InventoryItem.RED;
 
     // Start is called before the first frame update
@@ -20,7 +22,7 @@ public class Resource: MonoBehaviour, IInteractable
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(this.transform.position);
     }
 
     public bool wasTriggered(IInteractable inventory)
@@ -46,9 +48,10 @@ public class Resource: MonoBehaviour, IInteractable
         return null;
     }
 
-    public void deactivated()
+    public bool deactivated()
     {
         this.isActive = false;
+        return wasConsumed;
     }
 
     public InventoryItem getInventoryType()
@@ -58,6 +61,7 @@ public class Resource: MonoBehaviour, IInteractable
 
     public void consumed()
     {
+        this.wasConsumed = true;
     }
 
 
