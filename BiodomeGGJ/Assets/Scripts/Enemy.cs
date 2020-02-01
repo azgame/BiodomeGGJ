@@ -13,9 +13,10 @@ public abstract class Enemy : MonoBehaviour
     public int currenthealth;
     public Vector3 MycolorRGB;
     public Slider healthslider;
-    
+    MeshRenderer mr;
+    InventoryItem inventoryType;
     // Start is called before the first frame update
-   virtual protected void Start(){
+    virtual protected void Start(){
         initilize();
         rb = GetComponent<Rigidbody>();
         goal = GameObject.FindGameObjectWithTag("Goal");
@@ -75,6 +76,28 @@ public abstract class Enemy : MonoBehaviour
        
       //remove this object from all myenemy lists
         Destroy(this.gameObject);
+    }
+    public void SetInventoryType(InventoryItem type)
+    {
+        mr = GetComponent<MeshRenderer>();
+        inventoryType = type;
+        switch (type)
+        {
+            case InventoryItem.RED:
+                mr.material = Resources.Load("Materials/RedMat", typeof(Material)) as Material;
+                MycolorRGB.Set(3, 0, 0);
+                break;
+            case InventoryItem.GREEN:
+                mr.material = Resources.Load("Materials/GreenMat", typeof(Material)) as Material;
+                MycolorRGB.Set(0, 3, 0);
+                break;
+            case InventoryItem.BLUE:
+                mr.material = Resources.Load("Materials/BlueMat", typeof(Material)) as Material;
+                MycolorRGB.Set(0, 0, 3);
+                break;
+            default:
+                break;
+        }
     }
 }
     
