@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+
 public class PlayerMove : MonoBehaviour
 {
     // Components
-    public Rigidbody m_rb;
+    Rigidbody m_rb;
 
     // Exposed
     [Range(1, 20)]
     public float m_speed;
+
+    [Range(1, 20)]
+    public float m_dashSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -18,15 +21,11 @@ public class PlayerMove : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Move(Vector2 moveDir_, float dash_)
     {
-        
-    }
-
-    public void Move(Vector2 moveDir_)
-    {
-        Vector3 move = new Vector3(moveDir_.x * m_speed, moveDir_.y * m_speed, 0.0f);
+        Vector3 dash = new Vector3(moveDir_.x * dash_ * m_dashSpeed, 0.0f, moveDir_.y * dash_ * m_dashSpeed);
+        Vector3 move = new Vector3(moveDir_.x * m_speed, 0.0f, moveDir_.y * m_speed);
         m_rb.velocity = move;
+        m_rb.AddForce(dash, ForceMode.Impulse);
     }
 }
