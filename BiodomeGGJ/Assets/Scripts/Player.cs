@@ -117,7 +117,6 @@ public class Player : MonoBehaviour
             this.inventory = item;
             GameObject go = Instantiate(((MonoBehaviour)item).gameObject);
             go.transform.parent = this.holdSpace.transform;
-            //go.GetComponent<IInteractable>().SetParent(holdSpace);
         }
     }
 
@@ -131,6 +130,4 @@ public class Player : MonoBehaviour
         }
         this.inventory = null;
     }
-
-
 }

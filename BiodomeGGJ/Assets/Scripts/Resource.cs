@@ -10,7 +10,6 @@ public class Resource: MonoBehaviour, IInteractable
     bool isActive = true;
 
     bool wasConsumed = false;
-    public GameObject parent;
 
     InventoryItem inventoryType = InventoryItem.RED;
 
