@@ -120,7 +120,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 1fe14272a32c9d244b89cd2e69ef618d, type: 2}
 --- !u!1 &444972305
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,6 +675,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TowerDefenseMap
+      objectReference: {fileID: 0}
+    - target: {fileID: 4220437119955167397, guid: fdd3bff02621ce04d86821a01fd45e03,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4220437120174843844, guid: fdd3bff02621ce04d86821a01fd45e03,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4220437120440815178, guid: fdd3bff02621ce04d86821a01fd45e03,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4220437121396021410, guid: fdd3bff02621ce04d86821a01fd45e03,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5935753796339334280, guid: fdd3bff02621ce04d86821a01fd45e03,
         type: 3}
