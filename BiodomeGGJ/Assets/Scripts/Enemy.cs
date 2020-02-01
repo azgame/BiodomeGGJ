@@ -13,7 +13,7 @@ public abstract class Enemy : MonoBehaviour
     public int currenthealth;
     public Vector3 MycolorRGB;
     public Slider healthslider;
-    MeshRenderer mr;
+    SkinnedMeshRenderer mr;
     InventoryItem inventoryType;
     // Start is called before the first frame update
     virtual protected void Start(){
@@ -79,7 +79,7 @@ public abstract class Enemy : MonoBehaviour
     }
     public void SetInventoryType(InventoryItem type)
     {
-        mr = GetComponent<MeshRenderer>();
+        mr = GetComponentInChildren        <SkinnedMeshRenderer>();
         inventoryType = type;
         switch (type)
         {

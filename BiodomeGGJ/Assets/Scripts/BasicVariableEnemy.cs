@@ -15,4 +15,10 @@ public class BasicVariableEnemy : Enemy
     {
         base.Update();
     }
+    protected override void initilize()
+    {
+        
+        maxhealth = 100;
+        currenthealth = maxhealth;
+    }
 }
