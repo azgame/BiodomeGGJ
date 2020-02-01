@@ -162,6 +162,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1752061763494336246}
   - component: {fileID: 1752061763493862721}
+  - component: {fileID: -5506734902648176128}
   m_Layer: 0
   m_Name: Basic_Tower
   m_TagString: Tower
@@ -207,6 +208,19 @@ MonoBehaviour:
   bullet: {fileID: 235737917391970005, guid: 33f6693ac1d981b4ca09ec3eae2f7b76, type: 3}
   spawnLocation: {fileID: 1752061763826577184}
   myEnemies: []
+--- !u!135 &-5506734902648176128
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752061763493996600}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1752061763494000562
 GameObject:
   m_ObjectHideFlags: 0
