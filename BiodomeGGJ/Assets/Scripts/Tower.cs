@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public abstract class Tower : MonoBehaviour
 {
@@ -12,7 +14,7 @@ public abstract class Tower : MonoBehaviour
     protected float attackTimeMax;
     [SerializeField]
     protected float attackTimeCurrent;
-
+    public Slider ammoslider;
     protected int damage;
     public GameObject bullet;
     public GameObject spawnLocation;
@@ -24,6 +26,11 @@ public abstract class Tower : MonoBehaviour
     {
         myEnemies=new List<GameObject>();
         myEnemies.Clear();
+        if(ammoslider)
+        {
+            ammoslider.maxValue = maxAmmo;
+            ammoslider.value = currentAmmo;
+        }
     }
 
     virtual protected void initilize()
@@ -48,8 +55,9 @@ public abstract class Tower : MonoBehaviour
         {
             Instantiate(bullet,spawnLocation.transform.position,spawnLocation.transform.rotation);
             bullet.GetComponent<Bullet>().colorRGB.Set(colorRGB.x,colorRGB.y,colorRGB.z);
-            
+            bullet.GetComponent<Bullet>().damage = damage;
             currentAmmo--;
+            ammoslider.value = currentAmmo;
 
             attackTimeCurrent = attackTimeMax;
             if(currentAmmo<=0)
@@ -89,5 +97,9 @@ public abstract class Tower : MonoBehaviour
     virtual  protected void death()
     {
         //die and turn broken etc
+    }
+    public void chnagecolor(Vector3 newcolor)
+    {
+        colorRGB.Set(newcolor.x, newcolor.y, newcolor.z);
     }
 }

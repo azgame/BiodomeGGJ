@@ -9,8 +9,9 @@ public class BasicTower : Tower
     // Start is called before the first frame update
     protected override void Start()
     {
-        base.Start();
         initilize();
+        base.Start();
+        
     }
 
     // Update is called once per frame

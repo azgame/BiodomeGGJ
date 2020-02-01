@@ -11,14 +11,16 @@ public class Player : MonoBehaviour
     PlayerMove m_moveComponent;
     PlayerInputActions m_inputActions;
 
-    IInteractable nearInteractable;
-
-    IInteractable inventory;
+    InteractiveObject nearObject;
 
     // Internal
     Vector2 m_moveDir;
+<<<<<<< HEAD
+    bool interact;
     bool isPushed;
+=======
     float interact;
+>>>>>>> Can walk into a thing and interact with it, basic
     float dash;
     int dashTimer;
 
@@ -62,15 +64,8 @@ public class Player : MonoBehaviour
     // Interact Action
     public void Interact(InputAction.CallbackContext context)
     {
-        if (this.interact == 0) {
-            if (this.nearInteractable != null) {
-                this.inventory = this.nearInteractable.activated(this.inventory);
-            } else if (this.inventory != null) {
-                this.inventory.deactivated();
-                this.inventory = null;
-            }
-        }
-        this.interact = context.ReadValue<float>();
+        interact = context.ReadValue<float>();
+        Debug.Log(this.nearObject);
     }
 
     // Dash Action
@@ -95,18 +90,17 @@ public class Player : MonoBehaviour
     /// Trigger Events --------------------------------------
     public void OnTriggerEnter(Collider other)
     {
-        IInteractable interactable = other.gameObject.GetComponent<IInteractable>();
-        if (interactable != null && interactable.wasTriggered(inventory)) {
-            this.nearInteractable = other.gameObject.GetComponent<IInteractable>();
+        Debug.Log(other.gameObject.tag);
+        if (other.gameObject.tag == "InteractiveObject")
+        {
+            this.nearObject = other.gameObject.GetComponent<InteractiveObject>();
         }
-    }
-
+   }
     public void OnTriggerExit(Collider other)
     {
-        IInteractable interactable = other.gameObject.GetComponent<IInteractable>();
-        if (this.nearInteractable == interactable)
+        if (other.gameObject.tag == "InteractiveObject")
         {
-            this.nearInteractable = null;
+            this.nearObject = null;
         }
     }
 
