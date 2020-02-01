@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using UnityEngine.UI;
 public abstract class Enemy : MonoBehaviour
 {
 
@@ -12,7 +12,7 @@ public abstract class Enemy : MonoBehaviour
     public int maxhealth;
     public int currenthealth;
     public Vector3 MycolorRGB;
-    
+    public Slider healthslider;
     // Start is called before the first frame update
    virtual protected void Start(){
         initilize();
@@ -23,7 +23,8 @@ public abstract class Enemy : MonoBehaviour
         {
             agent.destination = goal.transform.position;
         }
-      
+        healthslider.maxValue = maxhealth;
+        healthslider.value = currenthealth;
     }
 
     // Update is called once per frame
@@ -54,6 +55,7 @@ public abstract class Enemy : MonoBehaviour
         }
         int totaldamage = Convert.ToInt32(reddamage + bluedamage + greendamage);
         currenthealth -= totaldamage;
+        healthslider.value = currenthealth;
         if (currenthealth <= 0)
         {
             death();
