@@ -20,9 +20,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_rSpawners = new List<Spawner>();
-        m_eSpawners = new List<Spawner>();
-        
         Queue<InventoryItem> spawnObjects = new Queue<InventoryItem>();
 
         foreach (InventoryItem type in Enum.GetValues(typeof(InventoryItem)))

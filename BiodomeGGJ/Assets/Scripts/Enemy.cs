@@ -13,6 +13,7 @@ public abstract class Enemy : MonoBehaviour
     public int currenthealth;
     public Vector3 MycolorRGB;
     public Slider healthslider;
+    public Image healthFillColour;
     SkinnedMeshRenderer mr;
     InventoryItem inventoryType;
     // Start is called before the first frame update
@@ -86,14 +87,17 @@ public abstract class Enemy : MonoBehaviour
             case InventoryItem.RED:
                 mr.material = Resources.Load("Materials/RedMat", typeof(Material)) as Material;
                 MycolorRGB.Set(3, 0, 0);
+                healthFillColour.color = Color.red;
                 break;
             case InventoryItem.GREEN:
                 mr.material = Resources.Load("Materials/GreenMat", typeof(Material)) as Material;
                 MycolorRGB.Set(0, 3, 0);
+                healthFillColour.color = Color.green;
                 break;
             case InventoryItem.BLUE:
                 mr.material = Resources.Load("Materials/BlueMat", typeof(Material)) as Material;
                 MycolorRGB.Set(0, 0, 3);
+                healthFillColour.color = Color.blue;
                 break;
             default:
                 break;

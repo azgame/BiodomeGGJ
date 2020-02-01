@@ -732,7 +732,7 @@ MonoBehaviour:
   - {fileID: 1173170945}
   resource: {fileID: 8634571069273037905, guid: be43bd8b1aadb8042baf0277e8d4856a,
     type: 3}
-  enemy: {fileID: 0}
+  enemy: {fileID: 2845902213668883292, guid: 4792f51565bfa7b46a1cad6392b8fb2b, type: 3}
 --- !u!1001 &1435405616
 PrefabInstance:
   m_ObjectHideFlags: 0
