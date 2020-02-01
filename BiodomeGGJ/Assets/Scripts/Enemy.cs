@@ -13,6 +13,7 @@ public abstract class Enemy : MonoBehaviour
     public int currenthealth;
     public Vector3 MycolorRGB;
     public Slider healthslider;
+    
     // Start is called before the first frame update
    virtual protected void Start(){
         initilize();
@@ -25,6 +26,7 @@ public abstract class Enemy : MonoBehaviour
         }
         healthslider.maxValue = maxhealth;
         healthslider.value = currenthealth;
+       
     }
 
     // Update is called once per frame
@@ -65,6 +67,13 @@ public abstract class Enemy : MonoBehaviour
     }
     public void death()
     {
+        foreach(GameObject tower in GameObject.FindGameObjectsWithTag("Tower"))
+        {
+            tower.GetComponent<Tower>().EnemyDeath(this.gameObject);
+        }
+      
+       
+      //remove this object from all myenemy lists
         Destroy(this.gameObject);
     }
 }
