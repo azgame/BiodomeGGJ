@@ -8,30 +8,59 @@ public class Player : MonoBehaviour
 {
 
     // Components
-    PlayerMove m_move;
+    PlayerMove m_moveComponent;
     PlayerInputActions m_inputActions;
 
     // Internal
     Vector2 m_moveDir;
+    bool interact;
+    float dash;
 
 
     // Start is called before the first frame update
     void Start()
     {
         m_moveDir = Vector2.zero;
-        m_move = GetComponent<PlayerMove>();
+        m_moveComponent = GetComponent<PlayerMove>();
     }
 
     // Update is called once per frame
     void Update()
     {
         // Movement
-        m_move.Move(m_moveDir);
+        m_moveComponent.Move(m_moveDir, dash);
     }
 
+
+    /// Unity Input Events -----------------------------------
     // Move Action
     public void Move(InputAction.CallbackContext context)
     {
         m_moveDir = context.ReadValue<Vector2>();
+    }
+
+    // Interact Action
+    public void Interact(InputAction.CallbackContext context)
+    {
+        interact = context.ReadValue<bool>();
+    }
+
+    // Dash Action
+    public void Dash(InputAction.CallbackContext context)
+    {
+        dash = context.ReadValue<float>();
+        Debug.Log(context.ReadValue<float>());
+    }
+
+
+    /// Collision Events --------------------------------------
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Vector3 otherPos = collision.gameObject.transform.position;
+            Vector3 collisionDir = this.transform.position - otherPos;
+            m_moveComponent.Move(collisionDir, 1.0f);
+        }
     }
 }
