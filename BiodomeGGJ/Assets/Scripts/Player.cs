@@ -116,9 +116,8 @@ public class Player : MonoBehaviour
         if (item != null) {
             this.inventory = item;
             GameObject go = Instantiate(((MonoBehaviour)item).gameObject);
-            // go.transform.parent = this.holdSpace.transform;
-            go.transform.SetParent(this.holdSpace.transform, false);
-            go.transform.position = this.holdSpace.transform.position;
+            go.transform.parent = this.holdSpace.transform;
+            //go.GetComponent<IInteractable>().SetParent(holdSpace);
         }
     }
 

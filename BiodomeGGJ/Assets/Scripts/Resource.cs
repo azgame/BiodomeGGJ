@@ -10,18 +10,25 @@ public class Resource: MonoBehaviour, IInteractable
     bool isActive = true;
 
     bool wasConsumed = false;
+    public GameObject parent;
 
     InventoryItem inventoryType = InventoryItem.RED;
 
     // Start is called before the first frame update
     void Start()
     {
+        parent = new GameObject();
         this.gameObject.tag = "InteractiveObject";
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (this.transform.parent != null)
+        {
+            this.transform.position = this.transform.parent.position;
+        }
+        
         Debug.Log(this.transform.position);
     }
 
@@ -63,6 +70,4 @@ public class Resource: MonoBehaviour, IInteractable
     {
         this.wasConsumed = true;
     }
-
-
 }
