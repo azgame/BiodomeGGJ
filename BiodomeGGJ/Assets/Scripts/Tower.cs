@@ -18,7 +18,7 @@ public abstract class Tower : MonoBehaviour, IInteractable
     protected int damage;
     public GameObject bullet;
     public GameObject spawnLocation;
-    protected List<GameObject> myEnemies;
+    public List<GameObject> myEnemies;
     //float ammo;
 
     bool isInPickupRange = false;
@@ -78,24 +78,7 @@ public abstract class Tower : MonoBehaviour, IInteractable
     }
 
    
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Enemy")
-        {
-           
-            myEnemies.Add(other.gameObject);
-        }
-    }
-
-    
-    public void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Enemy" && myEnemies.Contains(other.gameObject))
-        {
-            
-            myEnemies.Remove(other.gameObject);
-        }
-    }
+   
 
     public void EnemyDeath(GameObject deadenemy)
     {
