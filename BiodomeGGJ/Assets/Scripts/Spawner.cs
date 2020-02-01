@@ -44,6 +44,33 @@ public class Spawner : MonoBehaviour
                 SpawnObjects();
             }
         }
+
+        if (m_spawnType.Count <= 0)
+            if (m_spawnObject.tag == "Resource")
+                GenerateSpawnQueue();
+    }
+
+
+    void GenerateSpawnQueue()
+    {
+        for (int i = 0; i < 25; i++)
+        {
+            int rInt = Random.Range(0, 3);
+            switch (rInt)
+            {
+            case 0:
+                m_spawnType.Enqueue(InventoryItem.BLUE);
+                break;
+            case 1:
+                m_spawnType.Enqueue(InventoryItem.RED);
+                break;
+            case 2:
+                m_spawnType.Enqueue(InventoryItem.GREEN);
+                break;
+            default:
+                break;
+            }
+        }
     }
 
     
