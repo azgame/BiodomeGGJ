@@ -14,7 +14,9 @@ public class Player : MonoBehaviour
     // Internal
     Vector2 m_moveDir;
     bool interact;
+    bool isPushed;
     float dash;
+    int dashTimer;
 
 
     // Start is called before the first frame update
@@ -22,13 +24,25 @@ public class Player : MonoBehaviour
     {
         m_moveDir = Vector2.zero;
         m_moveComponent = GetComponent<PlayerMove>();
+        isPushed = false;
+        dashTimer = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         // Movement
-        m_moveComponent.Move(m_moveDir, dash);
+        if (!isPushed)
+            m_moveComponent.Move(m_moveDir, dash);
+        else
+        {
+            dashTimer++;
+            if (dashTimer > 20)
+            {
+                isPushed = false;
+                dashTimer = 0;
+            }
+        }
     }
 
 
@@ -60,6 +74,7 @@ public class Player : MonoBehaviour
             Vector3 otherPos = collision.gameObject.transform.position;
             Vector3 collisionDir = this.transform.position - otherPos;
             m_moveComponent.Move(collisionDir, 1.0f);
+            isPushed = true;
         }
     }
 }
