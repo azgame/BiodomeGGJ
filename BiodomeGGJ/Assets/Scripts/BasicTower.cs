@@ -9,7 +9,7 @@ public class BasicTower : Tower
     // Start is called before the first frame update
     protected override void Start()
     {
-        initilize();
+        initialize();
         base.Start();
         
     }
@@ -20,13 +20,13 @@ public class BasicTower : Tower
         base.Update();
     }
 
-    protected override void initilize()
+    protected override void initialize()
     {
         base.maxAmmo = 100;
         base.currentAmmo = maxAmmo;
         base.attackTimeMax = 60.0f;
         //change these color values values later, just tests
-        base.colorRGB.Set(1, 1, 1);
+        base.colorRGB.Set(0, 0, 0);
         //DO NOT FORGET!!!^^
         base.attackTimeCurrent = attackTimeMax;
 

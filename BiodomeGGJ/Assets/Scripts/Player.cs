@@ -50,7 +50,6 @@ public class Player : MonoBehaviour
                 dashTimer = 0;
             }
         }
-        // Debug.Log(this.transform.position);
     }
 
 
@@ -67,6 +66,7 @@ public class Player : MonoBehaviour
         if (this.interact == 0) {
             if (this.nearInteractable != null && this.nearInteractable != this.inventory) {
                 IInteractable pickup = this.nearInteractable.activated(this.inventory);
+                this.Drop();
                 this.Pickup(pickup);
             } else if (this.inventory != null) {
                 this.Drop();
@@ -121,7 +121,6 @@ public class Player : MonoBehaviour
     }
 
     private void Drop() {
-        Debug.Log("drop");
         if (this.inventory != null) {
             bool consumed = this.inventory.deactivated();
             if (!consumed) {
