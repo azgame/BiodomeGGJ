@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Resource: MonoBehaviour, IInteractable
 {
-    
+    MeshRenderer mr;
+
     // Is a player with inventory space close?
     bool isInProximity = false;
     bool isActive = true;
@@ -17,7 +18,6 @@ public class Resource: MonoBehaviour, IInteractable
     void Start()
     {
         this.gameObject.tag = "Resource";
-
     }
 
     // Update is called once per frame
@@ -26,6 +26,26 @@ public class Resource: MonoBehaviour, IInteractable
         if (this.transform.parent != null)
         { 
             this.transform.position = this.transform.parent.position;
+        }
+    }
+
+    public void SetInventoryType(InventoryItem type)
+    {
+        mr = GetComponent<MeshRenderer>();
+        inventoryType = type;
+        switch (type)
+        {
+            case InventoryItem.RED:
+                mr.material = Resources.Load("Materials/RedMat", typeof(Material)) as Material;
+                break;
+            case InventoryItem.GREEN:
+                mr.material = Resources.Load("Materials/GreenMat", typeof(Material)) as Material;
+                break;
+            case InventoryItem.BLUE:
+                mr.material = Resources.Load("Materials/BlueMat", typeof(Material)) as Material;
+                break;
+            default:
+                break;
         }
     }
 

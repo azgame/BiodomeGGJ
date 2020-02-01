@@ -5,8 +5,10 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
 
-    Queue<GameObject> m_spawnObjects;
+    GameObject m_spawnObject;
+    Queue<InventoryItem> m_spawnType;
     List<GameObject> m_spawnLocations;
+    List<GameObject> m_usedSpawnLocs;
     GameObject spawnIndex;
     int spawnRate;
     int spawnTimer;
@@ -15,14 +17,16 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_spawnObjects = new Queue<GameObject>();
+        m_spawnType = new Queue<InventoryItem>();
         m_spawnLocations = new List<GameObject>();
+        m_usedSpawnLocs = new List<GameObject>();
 
         foreach (Transform child in transform)
         {
             m_spawnLocations.Add(child.gameObject);
         }
 
+        index = 0;
         spawnTimer = 0;
         spawnRate = 300;
     }
@@ -30,7 +34,7 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_spawnObjects.Count > 0)
+        if (m_spawnType.Count > 0)
         {
             if (spawnTimer < spawnRate)
                 spawnTimer++;
@@ -45,45 +49,52 @@ public class Spawner : MonoBehaviour
     
     void SpawnObjects()
     {
-        GameObject obj = new GameObject();
         for (int i = 0; i < m_spawnLocations.Count; i++)
         {
-            GameObject spawnLoc = m_spawnLocations[index];
-            if (!spawnLoc.GetComponent<SpawnTrigger>().isTriggered)
+            if (!m_spawnLocations[index].GetComponent<SpawnTrigger>().isTriggered)
             {
-                obj = m_spawnObjects.Dequeue();
+                if (m_spawnObject.tag == "Resource")
+                {
+                    InventoryItem itemType = m_spawnType.Dequeue();
+                    Instantiate(m_spawnObject, m_spawnLocations[index].transform);
+                    m_spawnObject.GetComponent<Resource>().SetInventoryType(itemType);
+                }
+                else
+                {
+
+                }
+                
                 break;
             }
-
             NextItem();
-        }
-
-        if (obj != null)
-        {
-            Instantiate(obj, m_spawnLocations[index].transform);
         }
     }
 
     // Spawn add objects to queue utitlies
-    public void AddObjects(Queue<GameObject> spawnObjects_)
+    public void AddObjects(GameObject spawnObject_, Queue<InventoryItem> spawnType_)
     {
-        foreach(GameObject obj in spawnObjects_)
+        foreach(InventoryItem item in spawnType_)
         {
-            m_spawnObjects.Enqueue(obj);
+            m_spawnType.Enqueue(item);
         }
+
+        m_spawnObject = spawnObject_;
     }
 
-    public void AddObjects(List<GameObject> spawnObjects_)
+    public void AddObjects(GameObject spawnObject_, List<InventoryItem> spawnType_)
     {
-        foreach (GameObject obj in spawnObjects_)
+        foreach (InventoryItem item in spawnType_)
         {
-            m_spawnObjects.Enqueue(obj);
+            m_spawnType.Enqueue(item);
         }
+
+        m_spawnObject = spawnObject_;
     }
 
-    public void AddObject(GameObject spawnObject_)
+    public void AddObject(GameObject spawnObject_, InventoryItem spawnType_)
     {
-        m_spawnObjects.Enqueue(spawnObject_);
+        m_spawnType.Enqueue(spawnType_);
+        m_spawnObject = spawnObject_;
     }
 
     // Spawn location utitlies
