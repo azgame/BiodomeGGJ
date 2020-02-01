@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     PlayerMove m_moveComponent;
     PlayerInputActions m_inputActions;
 
+    public GameObject holdSpace;
     IInteractable nearInteractable;
 
     IInteractable inventory;
@@ -49,6 +50,7 @@ public class Player : MonoBehaviour
                 dashTimer = 0;
             }
         }
+        // Debug.Log(this.transform.position);
     }
 
 
@@ -64,10 +66,10 @@ public class Player : MonoBehaviour
     {
         if (this.interact == 0) {
             if (this.nearInteractable != null) {
-                this.inventory = this.nearInteractable.activated(this.inventory);
+                IInteractable pickup = this.nearInteractable.activated(this.inventory);
+                this.Pickup(pickup);
             } else if (this.inventory != null) {
-                this.inventory.deactivated();
-                this.inventory = null;
+                this.Drop();
             }
         }
         this.interact = context.ReadValue<float>();
@@ -109,5 +111,27 @@ public class Player : MonoBehaviour
             this.nearInteractable = null;
         }
     }
+
+    private void Pickup(IInteractable item) {
+        if (item != null) {
+            this.inventory = item;
+            GameObject go = Instantiate(((MonoBehaviour)item).gameObject);
+            // go.transform.parent = this.holdSpace.transform;
+            go.transform.SetParent(this.holdSpace.transform, false);
+            go.transform.position = this.holdSpace.transform.position;
+        }
+    }
+
+    private void Drop() {
+        if (this.inventory != null) {
+            bool consumed = this.inventory.deactivated();
+            if (!consumed) {
+                GameObject go = Instantiate(((MonoBehaviour)this.inventory).gameObject);
+                go.transform.SetParent(null);
+            }
+        }
+        this.inventory = null;
+    }
+
 
 }
