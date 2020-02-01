@@ -21,10 +21,12 @@ public class BasicTower : Tower
 
     protected override void initilize()
     {
-        base.maxAmmo = 10;
+        base.maxAmmo = 100;
         base.currentAmmo = maxAmmo;
         base.attackTimeMax = 60.0f;
-        
+        //change these color values values later, just tests
+        base.colorRGB.Set(1, 1, 1);
+        //DO NOT FORGET!!!^^
         base.attackTimeCurrent = attackTimeMax;
 
         base.damage = 10;

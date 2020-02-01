@@ -2,25 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public abstract class Bullet : MonoBehaviour
 {
-    int deathtime;
-    int movementSpeed;
+   protected int deathtime;
+   protected int movementSpeed;
+    public Vector3 colorRGB;
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
-        deathtime = 180;
-        movementSpeed = 1;
+        initilize();
     }
 
     // Update is called once per frame
-    void Update()
+   protected void Update()
     {
-        transform.position += Vector3.forward * Time.deltaTime * movementSpeed;
+        transform.position += transform.forward * Time.deltaTime * movementSpeed;
         deathtime--;
         if(deathtime<=0)
         {
             Destroy(this.gameObject);
+        }
+    }
+    virtual protected void initilize()
+    {
+
+    }
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            Destroy(this.gameObject);
+            
         }
     }
 }

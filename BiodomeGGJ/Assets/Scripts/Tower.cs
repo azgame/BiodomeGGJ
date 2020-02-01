@@ -7,7 +7,7 @@ public abstract class Tower : MonoBehaviour
     // Start is called before the first frame update
     protected int  maxAmmo;
     protected int  currentAmmo;
-
+    public Vector3 colorRGB;
     [SerializeField]
     protected float attackTimeMax;
     [SerializeField]
@@ -37,6 +37,7 @@ public abstract class Tower : MonoBehaviour
          if (myEnemies.Count != 0)
          {
             this.gameObject.transform.LookAt(myEnemies[0].transform);
+            transform.LookAt(new Vector3(myEnemies[0].transform.position.x, transform.position.y, myEnemies[0].transform.position.z));
             attack();
          }
     }
@@ -45,33 +46,43 @@ public abstract class Tower : MonoBehaviour
     {
         if (attackTimeCurrent <= 0&&currentAmmo>0)
         {
-            Instantiate(bullet,spawnLocation.transform);
+            Instantiate(bullet,spawnLocation.transform.position,spawnLocation.transform.rotation);
+            bullet.GetComponent<Bullet>().colorRGB.Set(colorRGB.x,colorRGB.y,colorRGB.z);
+            
             currentAmmo--;
+
             attackTimeCurrent = attackTimeMax;
+            if(currentAmmo<=0)
+            {
+                death();
+            }
         }
-        else
+         if (attackTimeCurrent>=0)
         {
+
             attackTimeCurrent--;
         }
+
         
     }
 
-    public void OnCollisionEnter(Collision collision)
+   
+    public void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.tag=="Enemy")
+        if (other.gameObject.tag == "Enemy")
         {
-            Debug.Log("enter");
-            myEnemies.Add(collision.gameObject);
+           
+            myEnemies.Add(other.gameObject);
         }
-        
     }
 
-    public void OnCollisionExit(Collision collision)
+    
+    public void OnTriggerExit(Collider other)
     {
-        if (collision.gameObject.tag == "Enemy" && myEnemies.Contains(collision.gameObject))
+        if (other.gameObject.tag == "Enemy" && myEnemies.Contains(other.gameObject))
         {
-            Debug.Log("exit");
-            myEnemies.Remove(collision.gameObject);
+            
+            myEnemies.Remove(other.gameObject);
         }
     }
 
