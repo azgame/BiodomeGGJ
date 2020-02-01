@@ -30,13 +30,15 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (spawnTimer < spawnRate)
-            spawnTimer++;
-        else
+        if (m_spawnObjects.Count > 0)
         {
-            spawnTimer = 0;
-            if (m_spawnObjects.Count > 0)
+            if (spawnTimer < spawnRate)
+                spawnTimer++;
+            else
+            {
+                spawnTimer = 0;
                 SpawnObjects();
+            }
         }
     }
 

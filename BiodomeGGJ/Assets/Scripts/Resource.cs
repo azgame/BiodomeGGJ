@@ -16,7 +16,6 @@ public class Resource: MonoBehaviour, IInteractable
     // Start is called before the first frame update
     void Start()
     {
-        parent = new GameObject();
         this.gameObject.tag = "InteractiveObject";
     }
 
@@ -24,7 +23,7 @@ public class Resource: MonoBehaviour, IInteractable
     void Update()
     {
         if (this.transform.parent != null)
-        {
+        { 
             this.transform.position = this.transform.parent.position;
         }
         

@@ -12,17 +12,26 @@ public class GameManager : MonoBehaviour
     // Wave timer
     // Game timer
     List<Spawner> m_spawners;
-    Resources resource;
+    public List<GameObject> resources;
 
     // Start is called before the first frame update
     void Start()
     {
+        resources = new List<GameObject>();
         m_spawners = new List<Spawner>();
+        
+
+        Queue<GameObject> spawnObjects = new Queue<GameObject>();
+
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 4; j++)
+                spawnObjects.Enqueue(resources[i]);
+
         Spawner[] spawns = FindObjectsOfType<Spawner>();
         foreach (Spawner s in spawns)
-            m_spawners.Add(s);
-
-        
+        {
+            s.AddObjects(spawnObjects);
+        }
     }
 
     // Update is called once per frame
