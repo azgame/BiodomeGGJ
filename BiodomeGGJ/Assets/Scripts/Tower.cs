@@ -54,7 +54,7 @@ public abstract class Tower : MonoBehaviour, IInteractable
 
     virtual  protected void attack()
     {
-        if (attackTimeCurrent <= 0&&currentAmmo>0)
+        if (this.fillCount() >= 3 && attackTimeCurrent <= 0 && currentAmmo > 0 )
         {
             Instantiate(bullet,spawnLocation.transform.position,spawnLocation.transform.rotation);
             bullet.GetComponent<Bullet>().colorRGB.Set(colorRGB.x,colorRGB.y,colorRGB.z);
