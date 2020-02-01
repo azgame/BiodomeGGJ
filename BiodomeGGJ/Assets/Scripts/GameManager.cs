@@ -12,13 +12,16 @@ public class GameManager : MonoBehaviour
     // Wave timer
     // Game timer
 
-    List<Spawner> m_spawners;
+    public List<Spawner> m_rSpawners;
+    public List<Spawner> m_eSpawners;
     public GameObject resource;
+    public GameObject enemy;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_spawners = new List<Spawner>();
+        m_rSpawners = new List<Spawner>();
+        m_eSpawners = new List<Spawner>();
         
         Queue<InventoryItem> spawnObjects = new Queue<InventoryItem>();
 
@@ -33,11 +36,16 @@ public class GameManager : MonoBehaviour
             }
         }
                 
-        Spawner[] spawns = FindObjectsOfType<Spawner>();
-        foreach (Spawner s in spawns)
+        foreach (Spawner s in m_rSpawners)
         {
             s.AddObjects(resource, spawnObjects);
         }
+
+        foreach (Spawner s in m_eSpawners)
+        {
+            s.AddObjects(enemy, spawnObjects);
+        }
+
     }
 
     // Update is called once per frame

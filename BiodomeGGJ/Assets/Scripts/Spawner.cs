@@ -8,7 +8,6 @@ public class Spawner : MonoBehaviour
     GameObject m_spawnObject;
     Queue<InventoryItem> m_spawnType;
     List<GameObject> m_spawnLocations;
-    List<GameObject> m_usedSpawnLocs;
     GameObject spawnIndex;
     int spawnRate;
     int spawnTimer;
@@ -19,7 +18,6 @@ public class Spawner : MonoBehaviour
     {
         m_spawnType = new Queue<InventoryItem>();
         m_spawnLocations = new List<GameObject>();
-        m_usedSpawnLocs = new List<GameObject>();
 
         foreach (Transform child in transform)
         {
@@ -88,7 +86,9 @@ public class Spawner : MonoBehaviour
                 }
                 else
                 {
-
+                    InventoryItem itemType = m_spawnType.Dequeue();
+                    Instantiate(m_spawnObject, m_spawnLocations[index].transform);
+                    m_spawnObject.GetComponent<Enemy>().SetInventoryType(itemType);
                 }
                 
                 break;

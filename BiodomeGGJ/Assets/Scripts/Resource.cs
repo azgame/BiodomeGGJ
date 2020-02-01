@@ -12,7 +12,7 @@ public class Resource: MonoBehaviour, IInteractable
 
     bool wasConsumed = false;
 
-    InventoryItem inventoryType = InventoryItem.RED;
+    InventoryItem inventoryType;
 
     // Start is called before the first frame update
     void Start()
