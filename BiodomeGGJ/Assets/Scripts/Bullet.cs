@@ -7,14 +7,15 @@ public abstract class Bullet : MonoBehaviour
    protected int deathtime;
    protected int movementSpeed;
     public Vector3 colorRGB;
+    public int damage;
     // Start is called before the first frame update
-    protected void Start()
+   virtual protected void Start()
     {
         initilize();
     }
 
     // Update is called once per frame
-   protected void Update()
+  virtual  protected void Update()
     {
         transform.position += transform.forward * Time.deltaTime * movementSpeed;
         deathtime--;
@@ -31,6 +32,10 @@ public abstract class Bullet : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
+            if(other.GetComponent<Enemy>())
+            {
+                other.GetComponent<Enemy>().takeDamage(colorRGB,damage);
+            }
             Destroy(this.gameObject);
             
         }

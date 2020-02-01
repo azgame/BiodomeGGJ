@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 235737917391969995}
   - component: {fileID: 235737917391970004}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Basic_Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 235737917391970005}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -92,7 +92,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &235737917391970004
 MonoBehaviour:
@@ -106,3 +106,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9770ae6a4b7594c44bc6830b1f41d39b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colorRGB: {x: 0, y: 0, z: 0}
+  damage: 0
