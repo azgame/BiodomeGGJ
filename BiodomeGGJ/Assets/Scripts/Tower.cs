@@ -21,8 +21,8 @@ public abstract class Tower : MonoBehaviour, IInteractable
     protected List<GameObject> myEnemies;
     //float ammo;
 
-    // Is a player with inventory space close?
-    bool isInProximity = false;
+    bool isInPickupRange = false;
+    bool isInRepairRange = false;
     bool isCarried = true;
 
     virtual protected void Start()
@@ -116,7 +116,10 @@ public abstract class Tower : MonoBehaviour, IInteractable
     public bool wasTriggered(IInteractable inventory)
     {
         if (inventory == null) {
-            this.isInProximity = true;
+            this.isInPickupRange = true;
+            return true;
+        } else if (inventory.getInventoryType() != InventoryItem.TOWER) {
+            this.isInRepairRange = true;
             return true;
         }
         return false;
@@ -124,7 +127,7 @@ public abstract class Tower : MonoBehaviour, IInteractable
 
     public void wasUntriggered()
     {
-        this.isInProximity = false;
+        this.isInPickupRange = false;
     }
 
     public IInteractable activated(IInteractable inventory)
@@ -134,7 +137,6 @@ public abstract class Tower : MonoBehaviour, IInteractable
             this.makeBroken();
             return this;
         } else if (inventory.getInventoryType() != InventoryItem.TOWER && this.fillCount() < 3) {
-            Debug.Log("hi");
             switch (inventory.getInventoryType()) {
                 case InventoryItem.RED:
                     {

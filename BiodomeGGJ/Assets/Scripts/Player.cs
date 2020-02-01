@@ -50,7 +50,6 @@ public class Player : MonoBehaviour
                 dashTimer = 0;
             }
         }
-        // Debug.Log(this.transform.position);
     }
 
 
@@ -67,6 +66,7 @@ public class Player : MonoBehaviour
         if (this.interact == 0) {
             if (this.nearInteractable != null && this.nearInteractable != this.inventory) {
                 IInteractable pickup = this.nearInteractable.activated(this.inventory);
+                this.Drop();
                 this.Pickup(pickup);
             } else if (this.inventory != null) {
                 this.Drop();
@@ -97,8 +97,6 @@ public class Player : MonoBehaviour
     /// Trigger Events --------------------------------------
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log("enter: ");
-        Debug.Log(other.gameObject.GetType());
         IInteractable interactable = other.gameObject.GetComponent<IInteractable>();
         if (interactable != null && interactable.wasTriggered(inventory)) {
             this.nearInteractable = other.gameObject.GetComponent<IInteractable>();
