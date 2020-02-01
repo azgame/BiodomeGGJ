@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+
 public class PlayerMove : MonoBehaviour
 {
     // Components
-    public Rigidbody m_rb;
+    Rigidbody m_rb;
 
     // Exposed
     [Range(1, 20)]
@@ -26,7 +26,7 @@ public class PlayerMove : MonoBehaviour
 
     public void Move(Vector2 moveDir_)
     {
-        Vector3 move = new Vector3(moveDir_.x * m_speed, moveDir_.y * m_speed, 0.0f);
+        Vector3 move = new Vector3(moveDir_.x * m_speed, 0.0f, moveDir_.y * m_speed);
         m_rb.velocity = move;
     }
 }
