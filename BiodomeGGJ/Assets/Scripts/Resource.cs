@@ -16,8 +16,7 @@ public class Resource: MonoBehaviour, IInteractable
     // Start is called before the first frame update
     void Start()
     {
-        parent = new GameObject();
-        this.gameObject.tag = "InteractiveObject";
+        this.gameObject.tag = "Resource";
     }
 
     // Update is called once per frame
@@ -27,8 +26,6 @@ public class Resource: MonoBehaviour, IInteractable
         {
             this.transform.position = this.transform.parent.position;
         }
-        
-        Debug.Log(this.transform.position);
     }
 
     public bool wasTriggered(IInteractable inventory)

@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
     public void Interact(InputAction.CallbackContext context)
     {
         if (this.interact == 0) {
-            if (this.nearInteractable != null) {
+            if (this.nearInteractable != null && this.nearInteractable != this.inventory) {
                 IInteractable pickup = this.nearInteractable.activated(this.inventory);
                 this.Pickup(pickup);
             } else if (this.inventory != null) {
@@ -115,16 +115,17 @@ public class Player : MonoBehaviour
     private void Pickup(IInteractable item) {
         if (item != null) {
             this.inventory = item;
-            GameObject go = Instantiate(((MonoBehaviour)item).gameObject);
+            GameObject go = ((MonoBehaviour)item).gameObject;
             go.transform.parent = this.holdSpace.transform;
         }
     }
 
     private void Drop() {
+        Debug.Log("drop");
         if (this.inventory != null) {
             bool consumed = this.inventory.deactivated();
             if (!consumed) {
-                GameObject go = Instantiate(((MonoBehaviour)this.inventory).gameObject);
+                GameObject go = ((MonoBehaviour)this.inventory).gameObject;
                 go.transform.SetParent(null);
             }
         }
