@@ -55,6 +55,9 @@ public class Resource: MonoBehaviour, IInteractable
     public bool deactivated()
     {
         this.isActive = false;
+        if (wasConsumed) {
+            Destroy(this.gameObject);
+        }
         return wasConsumed;
     }
 

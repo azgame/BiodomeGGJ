@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public abstract class Tower : MonoBehaviour
+public abstract class Tower : MonoBehaviour, IInteractable
 {
     // Start is called before the first frame update
     protected int  maxAmmo;
@@ -21,6 +21,9 @@ public abstract class Tower : MonoBehaviour
     protected List<GameObject> myEnemies;
     //float ammo;
 
+    // Is a player with inventory space close?
+    bool isInProximity = false;
+    bool isCarried = true;
 
     virtual protected void Start()
     {
@@ -33,7 +36,7 @@ public abstract class Tower : MonoBehaviour
         }
     }
 
-    virtual protected void initilize()
+    virtual protected void initialize()
     {
 
     }
@@ -62,7 +65,7 @@ public abstract class Tower : MonoBehaviour
             attackTimeCurrent = attackTimeMax;
             if(currentAmmo<=0)
             {
-                death();
+                makeBroken();
             }
         }
          if (attackTimeCurrent>=0)
@@ -94,12 +97,72 @@ public abstract class Tower : MonoBehaviour
         }
     }
 
-    virtual  protected void death()
+    virtual  protected void makeBroken()
     {
-        //die and turn broken etc
+        this.colorRGB.Set(0, 0, 0);
     }
-    public void chnagecolor(Vector3 newcolor)
+    public float fillCount()
     {
-        colorRGB.Set(newcolor.x, newcolor.y, newcolor.z);
+        return colorRGB.x + colorRGB.y + colorRGB.z;
     }
+    public bool wasTriggered(IInteractable inventory)
+    {
+        if (inventory == null) {
+            this.isInProximity = true;
+            return true;
+        }
+        return false;
+    }
+
+    public void wasUntriggered()
+    {
+        this.isInProximity = false;
+    }
+
+    public IInteractable activated(IInteractable inventory)
+    {
+        if (inventory == null) {
+            this.isCarried = true;
+            this.makeBroken();
+            return this;
+        } else if (inventory.getInventoryType() != InventoryItem.TOWER && this.fillCount() < 3) {
+            Debug.Log("hi");
+            switch (inventory.getInventoryType()) {
+                case InventoryItem.RED:
+                    {
+                        this.colorRGB.x += 1;
+                        break;
+                    }
+                case InventoryItem.GREEN:
+                    {
+                        this.colorRGB.y += 1;
+                        break;
+                    }
+                case InventoryItem.BLUE:
+                    {
+                        this.colorRGB.z += 1;
+                        break;
+                    }
+            }
+            inventory.consumed();
+        }
+        return null;
+    }
+
+    public bool deactivated()
+    {
+        this.isCarried = false;
+        return false;
+    }
+
+    public InventoryItem getInventoryType()
+    {
+        return InventoryItem.TOWER;
+    }
+
+    public void consumed()
+    {
+        // Not consumed
+    }
+
 }

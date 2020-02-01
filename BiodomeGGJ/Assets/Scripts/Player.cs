@@ -97,6 +97,8 @@ public class Player : MonoBehaviour
     /// Trigger Events --------------------------------------
     public void OnTriggerEnter(Collider other)
     {
+        Debug.Log("enter: ");
+        Debug.Log(other.gameObject.GetType());
         IInteractable interactable = other.gameObject.GetComponent<IInteractable>();
         if (interactable != null && interactable.wasTriggered(inventory)) {
             this.nearInteractable = other.gameObject.GetComponent<IInteractable>();
@@ -121,7 +123,6 @@ public class Player : MonoBehaviour
     }
 
     private void Drop() {
-        Debug.Log("drop");
         if (this.inventory != null) {
             bool consumed = this.inventory.deactivated();
             if (!consumed) {
