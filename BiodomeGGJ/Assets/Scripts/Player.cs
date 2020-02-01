@@ -49,7 +49,6 @@ public class Player : MonoBehaviour
     public void Dash(InputAction.CallbackContext context)
     {
         dash = context.ReadValue<float>();
-        Debug.Log(context.ReadValue<float>());
     }
 
 
