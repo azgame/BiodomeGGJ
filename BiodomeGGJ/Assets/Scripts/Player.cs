@@ -11,10 +11,12 @@ public class Player : MonoBehaviour
     PlayerMove m_moveComponent;
     PlayerInputActions m_inputActions;
 
+    InteractiveObject nearObject;
+
     // Internal
     Vector2 m_moveDir;
-    bool interact;
     bool isPushed;
+    float interact;
     float dash;
     int dashTimer;
 
@@ -58,7 +60,8 @@ public class Player : MonoBehaviour
     // Interact Action
     public void Interact(InputAction.CallbackContext context)
     {
-        interact = context.ReadValue<bool>();
+        interact = context.ReadValue<float>();
+        Debug.Log(this.nearObject);
     }
 
     // Dash Action
@@ -79,4 +82,22 @@ public class Player : MonoBehaviour
             isPushed = true;
         }
     }
+
+    /// Trigger Events --------------------------------------
+    public void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.gameObject.tag);
+        if (other.gameObject.tag == "InteractiveObject")
+        {
+            this.nearObject = other.gameObject.GetComponent<InteractiveObject>();
+        }
+   }
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "InteractiveObject")
+        {
+            this.nearObject = null;
+        }
+    }
+
 }
