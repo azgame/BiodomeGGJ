@@ -54,8 +54,22 @@ public abstract class Tower : MonoBehaviour, IInteractable
                 foreach(Transform gChild in child) {
                     if (gChild.tag == "TowerRepairUI") {
                         foreach(Transform ggChild in gChild) {
-                            Image i = ggChild.GetComponent<Image>();
-                            brokenUI.Add(i);
+                            brokenUI.Add(ggChild.GetComponent<Image>());
+                        }
+                    }
+                }
+            }
+        }
+        foreach(Transform child in this.transform) {
+            if (child.tag == "RepairedTower") {
+                foreach(Transform gChild in child) {
+                    if (gChild.tag == "AmmoUI") {
+                        foreach(Transform ggChild in gChild) {
+                            if (ggChild.tag == "TowerRepairUI") {
+                                foreach(Transform g3Child in ggChild) {
+                                    repairedUI.Add(g3Child.GetComponent<Image>());
+                                }
+                            }
                         }
                     }
                 }
@@ -162,6 +176,9 @@ public abstract class Tower : MonoBehaviour, IInteractable
             } else if (child.tag == "BrokenTower") {
                 child.gameObject.SetActive(false);
             }
+        }
+        for (int i = 0; i < 3; i++) {
+            repairedUI[i].color = brokenUI[i].color;
         }
     }
 
