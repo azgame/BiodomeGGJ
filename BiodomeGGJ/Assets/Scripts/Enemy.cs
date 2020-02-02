@@ -42,20 +42,30 @@ public abstract class Enemy : MonoBehaviour
     }
     public void takeDamage(Vector3 colorRGB,int basedamage)
     {
-        float reddamage = basedamage * colorRGB.x-basedamage* (MycolorRGB.z*0.5f);
-        if(reddamage<0)
+        bool isneutral;
+        if(colorRGB==new Vector3(1,1,1))
         {
-            reddamage = 0;
+            isneutral = true;
         }
-        float greendamage = basedamage * colorRGB.y - basedamage * (MycolorRGB.x * 0.5f);
-        if (greendamage < 0)
+        else
         {
-            greendamage = 0;
+            isneutral = false;
         }
-        float bluedamage = basedamage * colorRGB.z - basedamage * (MycolorRGB.y * 0.5f);
-        if (bluedamage < 0)
+        float reddamage = basedamage * colorRGB.x;
+        if(MycolorRGB.y>0&&!isneutral)
         {
-            bluedamage = 0;
+            reddamage *= MycolorRGB.y;
+        }
+      
+        float greendamage = basedamage * colorRGB.y;
+        if (MycolorRGB.z > 0&&!isneutral)
+        {
+            greendamage *= MycolorRGB.z;
+        }
+        float bluedamage = basedamage * colorRGB.z;
+        if (MycolorRGB.x > 0&&!isneutral)
+        {
+            bluedamage *= MycolorRGB.x;
         }
         int totaldamage = Convert.ToInt32(reddamage + bluedamage + greendamage);
         currenthealth -= totaldamage;
