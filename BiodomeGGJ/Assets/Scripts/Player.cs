@@ -41,7 +41,6 @@ public class Player : MonoBehaviour
         playerCam = camera;
         this.gameObject.GetComponent<PlayerInput>().camera = playerCam;
         rb = GetComponent<Rigidbody>();
-
     }
 
 
