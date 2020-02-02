@@ -183,6 +183,7 @@ public abstract class Tower : MonoBehaviour, IInteractable
         for (int i = 0; i < 3; i++) {
             repairedUI[i].color = brokenUI[i].color;
         }
+        this.reload();
     }
 
     virtual protected void onRepair(InventoryItem resourceType)
