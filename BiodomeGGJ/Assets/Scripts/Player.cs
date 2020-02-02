@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     // Components
     PlayerMove m_moveComponent;
     PlayerInputActions m_inputActions;
+    public Camera playerCam;
+    public Camera cameraPrefab;
 
     public GameObject holdSpace;
     IInteractable nearInteractable;
@@ -18,6 +20,8 @@ public class Player : MonoBehaviour
 
     // Internal
     Vector2 m_moveDir;
+    public Vector2 lookDir;
+    Vector3 cameraForward;
     bool isPushed;
     float interact;
     float dash;
@@ -30,14 +34,25 @@ public class Player : MonoBehaviour
         m_moveComponent = GetComponent<PlayerMove>();
         isPushed = false;
         dashTimer = 0;
+        Camera camera = Instantiate(cameraPrefab);
+        camera.GetComponent<CameraController>().target = this.gameObject;
+        playerCam = camera;
+        this.gameObject.GetComponent<PlayerInput>().camera = playerCam;
     }
 
 
     void Update()
     {
+        if (playerCam != null)
+            cameraForward = playerCam.transform.forward;
+
         // Movement
-        if (!isPushed)
-            m_moveComponent.Move(m_moveDir, dash);
+        if (!isPushed && playerCam != null)
+        {
+            Vector2 moveVec = new Vector2((cameraForward.x * m_moveDir.y) + (cameraForward.z * m_moveDir.x), (cameraForward.z * m_moveDir.y) - (cameraForward.x * m_moveDir.x));
+            Debug.Log(m_moveDir);
+            m_moveComponent.Move(moveVec, dash);
+        }
         else
         {
             // Hardcoded timer for if player has collided with another player,
@@ -52,14 +67,23 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void SetForward(Vector3 forward_)
+    {
+        cameraForward = forward_;
+    }
 
     /// Unity Input Events -----------------------------------
+
     // Move Action
     public void Move(InputAction.CallbackContext context)
     {
         m_moveDir = context.ReadValue<Vector2>();
     }
 
+    public void Look(InputAction.CallbackContext context)
+    {
+        lookDir = context.ReadValue<Vector2>();
+    }
     // Interact Action
     public void Interact(InputAction.CallbackContext context)
     {

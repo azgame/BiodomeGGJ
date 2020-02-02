@@ -18,7 +18,7 @@ public class PlayerMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_rb = GetComponent<Rigidbody>();
+        m_rb = this.gameObject.GetComponent<Rigidbody>();
     }
 
     public void Move(Vector2 moveDir_, float dash_)
