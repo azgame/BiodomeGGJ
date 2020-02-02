@@ -26,7 +26,7 @@ public abstract class Tower : MonoBehaviour, IInteractable
 
     bool isInPickupRange = false;
     bool isInRepairOrReloadRange = false;
-    bool isCarried = true;
+    bool isCarried = false;
 
     // UI Elements
     List<Image> brokenUI = new List<Image>();
