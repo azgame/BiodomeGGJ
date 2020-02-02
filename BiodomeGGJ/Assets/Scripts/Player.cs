@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     float interact;
     float dash;
     int dashTimer;
+    public Animator anim;
 
 
     void Start()
@@ -41,6 +42,7 @@ public class Player : MonoBehaviour
         playerCam = camera;
         this.gameObject.GetComponent<PlayerInput>().camera = playerCam;
         rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
     }
 
 
@@ -67,6 +69,13 @@ public class Player : MonoBehaviour
                 dashTimer = 0;
             }
         }
+        if (rb.velocity.x > 0 || rb.velocity.y > 0)
+        {
+            anim.SetBool("hold", true);
+
+        }
+
+        else anim.SetBool("hold", false);
     }
 
     public void SetForward(Vector3 forward_)

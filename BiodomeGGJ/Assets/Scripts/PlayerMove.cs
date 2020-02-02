@@ -40,6 +40,7 @@ public class PlayerMove : MonoBehaviour
         Rotating(move);
         m_rb.velocity = move;
         m_rb.AddForce(dash, ForceMode.Impulse);
+        anim.SetFloat("move", moveDir_.x + moveDir_.y);
     }
 
     void Rotating(Vector3 move_)
