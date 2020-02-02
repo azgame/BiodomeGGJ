@@ -7,49 +7,49 @@ using Random = UnityEngine.Random;
 public class GameManager : MonoBehaviour
 {
 
+    Queue<List<InventoryItem>> m_enemyWaveQ;
 
-    // Enemy queue
-    
-    Queue<InventoryItem> enemyqueue;
-    // Enemy spawn locations -> gameobject for spawner
     // Base health
     GameObject mainbase;
     public GameObject basicEnemy;
-    public GameObject currentEnemyspawner;
-    public GameObject Enemyspawner1;
-    public GameObject Enemyspawner2;
-    public GameObject Enemyspawner3;
+    public int spawnIndex;
     public int basehealth;
+
     // Wave timer
-    int wavetimer;
-    int wavetimermax;
+    int roundtimer;
+    int roundtimermax;
     int spawntimemax;
     int spawntime;
-    int wavebreaklength;
-    int wavebreaklengthmax;
+    int roundbreaklength;
+    int roundbreaklengthmax;
+    int numRounds;
+
     [SerializeField]
     bool onbreak;
-
-    // Game timer
-
-
 
     public List<Spawner> m_rSpawners;
     public List<Spawner> m_eSpawners;
     public GameObject resource;
     public GameObject enemy;
 
+    // UI
+    public Canvas ui_CardQUI;
+    public GameObject ui_Card;
+
     // Start is called before the first frame update
     void Start()
     {
-        spawntimemax = 60;
-        wavetimermax = 3600;
-        wavetimer = 60;
-        wavebreaklengthmax = 1800;
-        wavebreaklength = wavebreaklengthmax;
-        Queue<InventoryItem> spawnObjects = new Queue<InventoryItem>();
-         enemyqueue = new Queue<InventoryItem>();
+        numRounds = 10;
+        spawntimemax = 300;
+        roundtimermax = 3600;
+        roundtimer = 300;
+        roundbreaklengthmax = 1800;
+        roundbreaklength = roundbreaklengthmax;
+        onbreak = true;
+        spawntime = -1;
 
+        Queue<InventoryItem> spawnObjects = new Queue<InventoryItem>();
+        
         foreach (InventoryItem type in Enum.GetValues(typeof(InventoryItem)))
         {
             if (type != InventoryItem.TOWER)
@@ -63,87 +63,119 @@ public class GameManager : MonoBehaviour
                 
         foreach (Spawner s in m_rSpawners)
         {
-            s.AddObjects(resource, spawnObjects);
+            s.AddObjects(resource, new Queue<InventoryItem>());
         }
 
-        foreach (Spawner s in m_eSpawners)
-        {
-            s.AddObjects(enemy, spawnObjects);
-        }
+        //foreach (Spawner s in m_eSpawners)
+        //{
+        //    s.AddObjects(enemy, spawnObjects);
+        //}
+
+        m_enemyWaveQ = new Queue<List<InventoryItem>>();
+        CreateQueue(8);
+        CreateQueue(8);
+        CreateQueue(8);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (wavetimer > 0 && wavebreaklength <= 0&&onbreak==false)
+        if (roundtimer > 0 && roundbreaklength <= 0 && onbreak == false)
         {
             if (spawntime < 0)
             {
                 SpawnEnemy();
+                CreateQueue(8);
                 spawntime = spawntimemax;
             }
             spawntime--;
-            wavetimer--;
+            roundtimer--;
         }
-        else if (wavetimer<0 && wavebreaklength <= 0&&onbreak==false)
+        else if (roundtimer <= 0 && roundbreaklength <= 0 && onbreak == false)
         {
-            wavebreaklength = wavebreaklengthmax;
+            roundbreaklength = roundbreaklengthmax;
             onbreak = true;
+            Debug.Log("round finished");
+            numRounds--;
         }
-        else if(onbreak==true&&wavebreaklength>0)
+        else if (onbreak == true && roundbreaklength > 0)
         {
-            wavebreaklength--;
+            roundbreaklength--;
         }
-        else if(onbreak==true&&wavebreaklength<=0)
+        else if (onbreak == true && roundbreaklength <= 0)
         {
-            //new wave
+            //new round
             onbreak = false;
-            wavetimer = wavetimermax;
-            enemyqueue.Clear();
+            roundtimer = roundtimermax;
+            Debug.Log("new round coming");
+        }
+        else
+        {
+            Debug.Log("Some logic error");
         }
 
+        if (numRounds == 0)
+            Debug.Log("You win");
     }
-    public void basedamage(int damage)
+
+    public void BaseDamage(int damage)
     { 
         basehealth -= damage;
-        if(basehealth<0)
+        if(basehealth < 0)
         {
             //close game or go back to main menu
             Debug.Log("gameover");
         }
     }
-    void createqueue(int totalunits)
+
+    void CreateQueue(int totalunits)
     {
-        
-        
-            for (int i = 0; i < totalunits; i++)
+        List<InventoryItem> enemyList = new List<InventoryItem>();
+        for (int i = 0; i < totalunits; i++)
+        {
+            int rInt = Random.Range(0, 3);
+            switch (rInt)
             {
-                int rInt = Random.Range(0, 3);
-                switch (rInt)
-                {
-                    case 0:
-                        enemyqueue.Enqueue(InventoryItem.BLUE);
-                        break;
-                    case 1:
-                    enemyqueue.Enqueue(InventoryItem.RED);
-                        break;
-                    case 2:
-                    enemyqueue.Enqueue(InventoryItem.GREEN);
-                        break;
-                    default:
-                        break;
-                }
+            case 0:
+                enemyList.Add(InventoryItem.BLUE);
+                break;
+            case 1:
+                enemyList.Add(InventoryItem.RED);
+                break;
+            case 2:
+                enemyList.Add(InventoryItem.GREEN);
+                break;
+            default:
+                break;
             }
-        
+        }
+
+        m_enemyWaveQ.Enqueue(enemyList);
     }
+
     void SpawnEnemy()
     {
-        if (enemyqueue.Count > 0)
+        if (m_enemyWaveQ.Count > 0)
         {
-            Instantiate(basicEnemy, currentEnemyspawner.transform.position, currentEnemyspawner.transform.rotation);
-            InventoryItem itemType = enemyqueue.Dequeue();
-            basicEnemy.GetComponent<Enemy>().SetInventoryType(itemType);
+            m_eSpawners[spawnIndex].AddObjects(enemy, m_enemyWaveQ.Dequeue());
+        }
+
+        NextItem();
+    }
+
+    // Spawn location utitlies
+    void NextItem()
+    {
+        spawnIndex++;
+        spawnIndex %= m_rSpawners.Count;
+    }
+
+    void PreviousItem()
+    {
+        spawnIndex--;
+        if (spawnIndex < 0)
+        {
+            spawnIndex = m_rSpawners.Count - 1;
         }
     }
-    
 }
