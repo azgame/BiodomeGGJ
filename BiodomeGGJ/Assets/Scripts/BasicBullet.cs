@@ -11,6 +11,6 @@ public class BasicBullet : Bullet
     protected override void initilize()
     {
         base.deathtime = 180;
-        base.movementSpeed = 60;
+        base.movementSpeed = 100;
     }
 }

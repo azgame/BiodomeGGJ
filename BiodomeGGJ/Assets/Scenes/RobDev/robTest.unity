@@ -195,11 +195,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4656578365165046198, guid: 2dc7102652067594da49f268f946c854,
+    - target: {fileID: 4989067939275344207, guid: 2dc7102652067594da49f268f946c854,
         type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: Gmanager
+      value: 
+      objectReference: {fileID: 690722776}
     - target: {fileID: 6451207455189183753, guid: 2dc7102652067594da49f268f946c854,
         type: 3}
       propertyPath: m_Name
@@ -310,7 +310,7 @@ PrefabInstance:
     - target: {fileID: 8111533441817494610, guid: f89090b9cb46403448399215148e5326,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -380.41028
+      value: -156.2
       objectReference: {fileID: 0}
     - target: {fileID: 8111533441817494610, guid: f89090b9cb46403448399215148e5326,
         type: 3}
@@ -320,7 +320,7 @@ PrefabInstance:
     - target: {fileID: 8111533441817494610, guid: f89090b9cb46403448399215148e5326,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1936.6927
+      value: -1942.7
       objectReference: {fileID: 0}
     - target: {fileID: 8111533441817494610, guid: f89090b9cb46403448399215148e5326,
         type: 3}
@@ -659,6 +659,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f89090b9cb46403448399215148e5326, type: 3}
+--- !u!1 &690722776 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2534895734784566497, guid: 19c878e763ae6e24b93f980af4d9f848,
+    type: 3}
+  m_PrefabInstance: {fileID: 1207636886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &814332863
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1180,7 +1186,7 @@ PrefabInstance:
     - target: {fileID: 8111533441817494610, guid: f89090b9cb46403448399215148e5326,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -514.9
+      value: -250.4
       objectReference: {fileID: 0}
     - target: {fileID: 8111533441817494610, guid: f89090b9cb46403448399215148e5326,
         type: 3}
@@ -1190,7 +1196,7 @@ PrefabInstance:
     - target: {fileID: 8111533441817494610, guid: f89090b9cb46403448399215148e5326,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1715.4
+      value: -1877.8
       objectReference: {fileID: 0}
     - target: {fileID: 8111533441817494610, guid: f89090b9cb46403448399215148e5326,
         type: 3}

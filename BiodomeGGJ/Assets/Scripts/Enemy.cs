@@ -24,6 +24,7 @@ public abstract class Enemy : MonoBehaviour
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
         if(goal)
         {
+         
             agent.destination = goal.transform.position;
         }
         healthslider.maxValue = maxhealth;
