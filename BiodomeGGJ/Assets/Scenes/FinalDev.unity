@@ -1156,6 +1156,26 @@ PrefabInstance:
       propertyPath: m_rSpawners.Array.data[3]
       value: 
       objectReference: {fileID: 247631748}
+    - target: {fileID: 4829018696900115493, guid: 19c878e763ae6e24b93f980af4d9f848,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4829018696900115493, guid: 19c878e763ae6e24b93f980af4d9f848,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8732416427003438234, guid: 19c878e763ae6e24b93f980af4d9f848,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8732416427003438234, guid: 19c878e763ae6e24b93f980af4d9f848,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19c878e763ae6e24b93f980af4d9f848, type: 3}
 --- !u!114 &1262909242 stripped
