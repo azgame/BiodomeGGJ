@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-                
+
         foreach (Spawner s in m_rSpawners)
         {
             s.AddObjects(resource, new Queue<InventoryItem>());
@@ -139,7 +139,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void BaseDamage(int damage)
-    { 
+    {
         basehealth -= damage;
         basehealthslider.value = basehealth;
         if (basehealth < 0)
@@ -177,6 +177,12 @@ public class GameManager : MonoBehaviour
 
         while (blueList.Count > 0)
             enemyList.Add(blueList.Dequeue());
+
+        while (redList.Count > 0)
+            enemyList.Add(redList.Dequeue());
+
+        while (greenList.Count > 0)
+            enemyList.Add(greenList.Dequeue());
 
         m_enemyWaveQ.Enqueue(enemyList);
         GameObject card = Instantiate(ui_Card, ui_CardQUI.transform);
