@@ -6,8 +6,8 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
 
-    public  bool isRight;
-    public bool isLeft;
+    public  bool isFacingRight = true;
+    public bool isFacingLeft;
     public Animator anim;
 
     // Components
@@ -45,6 +45,11 @@ public class PlayerMove : MonoBehaviour
 
     public void  Flip(){
 
+        isFacingRight = !isFacingRight;
+
+        Vector3 localscale = gameObject.transform.localScale;
+        localscale.x *= -1;
+        transform.localScale = localscale;
 
 
     }
