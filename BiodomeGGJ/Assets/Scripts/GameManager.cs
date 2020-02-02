@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
         onbreak = true;
         spawntime = -1;
         enemySpawnNum = 24;
-       
+        basehealth = 20;
         Queue<InventoryItem> spawnObjects = new Queue<InventoryItem>();
 
 
