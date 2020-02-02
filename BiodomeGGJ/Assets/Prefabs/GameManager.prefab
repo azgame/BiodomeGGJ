@@ -311,6 +311,8 @@ MonoBehaviour:
     type: 3}
   spawnIndex: 0
   basehealth: 0
+  basehealthslider: {fileID: 3316859871034731698}
+  roundtimerslider: {fileID: 5166407195525067352}
   onbreak: 0
   m_rSpawners:
   - {fileID: 0}

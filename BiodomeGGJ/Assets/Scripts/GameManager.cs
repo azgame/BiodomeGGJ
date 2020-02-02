@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour
     public GameObject basicEnemy;
     public int spawnIndex;
     public int basehealth;
-   
+    public Slider basehealthslider;
+    public Slider roundtimerslider;
     // Wave timer
     int roundtimer;
     int roundtimermax;
@@ -43,8 +44,11 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        basehealth = 20;
+        
         numRounds = 10;
         spawntimemax = 2400;
+
         roundtimermax = spawntimemax * 4;
         roundtimer = roundtimermax;
         roundbreaklengthmax = spawntimemax * 2;
@@ -54,7 +58,7 @@ public class GameManager : MonoBehaviour
         enemySpawnNum = 24;
         waveIndex = 0;
 
-        basehealth = 20;
+        
         Queue<InventoryItem> spawnObjects = new Queue<InventoryItem>();
 
 
@@ -83,6 +87,11 @@ public class GameManager : MonoBehaviour
         CreateQueue(enemySpawnNum);
         CreateQueue(enemySpawnNum);
         CreateQueue(enemySpawnNum);
+        roundtimerslider.maxValue = spawntimemax;
+        roundtimerslider.value = spawntime;
+        basehealthslider.maxValue = basehealth;
+        basehealthslider.value = basehealth;
+
     }
 
     // Update is called once per frame
@@ -99,6 +108,7 @@ public class GameManager : MonoBehaviour
             }
             spawntime--;
             roundtimer--;
+            roundtimerslider.value = spawntime;
         }
         else if (roundtimer <= 0 && roundbreaklength <= 0 && onbreak == false)
         {
@@ -116,6 +126,7 @@ public class GameManager : MonoBehaviour
             //new round
             onbreak = false;
             roundtimer = roundtimermax;
+            
             Debug.Log("new round coming");
         }
         else
@@ -130,6 +141,7 @@ public class GameManager : MonoBehaviour
     public void BaseDamage(int damage)
     { 
         basehealth -= damage;
+        basehealthslider.value = basehealth;
         if(basehealth < 0)
         {
             //close game or go back to main menu
