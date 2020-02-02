@@ -11,6 +11,8 @@ TagManager:
   - Tower
   - RepairedTower
   - BrokenTower
+  - TowerRepairUI
+  - AmmoUI
   layers:
   - Default
   - TransparentFX
