@@ -70,7 +70,6 @@ public class GameManager : MonoBehaviour
         {
             s.AddObjects(enemy, spawnObjects);
         }
-
     }
 
     // Update is called once per frame
