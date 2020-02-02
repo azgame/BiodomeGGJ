@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
         m_moveComponent = GetComponent<PlayerMove>();
         isPushed = false;
         dashTimer = 0;
-        Camera camera = Instantiate(cameraPrefab, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 1, this.gameObject.transform.position.z - 8), Quaternion.identity);
+        Camera camera = Instantiate(cameraPrefab, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 15, this.gameObject.transform.position.z - 75), Quaternion.identity);
         camera.GetComponent<CameraController>().target = this.gameObject;
         playerCam = camera;
         this.gameObject.GetComponent<PlayerInput>().camera = playerCam;
