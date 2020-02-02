@@ -22,7 +22,7 @@ public class BasicTower : Tower
 
     protected override void initialize()
     {
-        base.maxAmmo = 100;
+        base.maxAmmo = 20;
         base.currentAmmo = maxAmmo;
         base.attackTimeMax = 60.0f;
         base.attackTimeCurrent = attackTimeMax;
