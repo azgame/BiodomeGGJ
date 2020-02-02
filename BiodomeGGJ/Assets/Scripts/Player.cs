@@ -166,6 +166,11 @@ public class Player : MonoBehaviour
             if (!consumed) {
                 GameObject go = ((MonoBehaviour)this.inventory).gameObject;
                 go.transform.SetParent(null);
+
+                if (go.tag == "Resource")
+                {
+                    go.transform.position = new Vector3(go.transform.position.x + 1, go.transform.position.y - 2, go.transform.position.z + 1);
+                }
             }
         }
         this.inventory = null;
