@@ -83,9 +83,9 @@ public abstract class Tower : MonoBehaviour, IInteractable
         
         if (myEnemies.Count != 0)
         {
-        this.gameObject.transform.LookAt(myEnemies[0].transform);
-        transform.LookAt(new Vector3(myEnemies[0].transform.position.x, transform.position.y, myEnemies[0].transform.position.z));
-        attack();
+            this.gameObject.transform.LookAt(myEnemies[0].transform);
+            transform.LookAt(new Vector3(myEnemies[0].transform.position.x, transform.position.y, myEnemies[0].transform.position.z));
+            attack();
         }
 
         if (currentAmmo <= 0 && this.fillCount() > 2)
