@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
         enemySpawnNum = 24;
         waveIndex = 0;
 
+        basehealth = 20;
         Queue<InventoryItem> spawnObjects = new Queue<InventoryItem>();
 
 

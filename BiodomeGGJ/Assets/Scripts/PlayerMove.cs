@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+
+    public  bool isRight;
+    public bool isLeft;
+    public Animator anim;
+
     // Components
     Rigidbody m_rb;
 
@@ -18,7 +23,14 @@ public class PlayerMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();
         m_rb = this.gameObject.GetComponent<Rigidbody>();
+    }
+
+
+     void Update()
+    {
+        
     }
 
     public void Move(Vector2 moveDir_, float dash_)
@@ -28,4 +40,13 @@ public class PlayerMove : MonoBehaviour
         m_rb.velocity = move;
         m_rb.AddForce(dash, ForceMode.Impulse);
     }
+
+
+
+    public void  Flip(){
+
+
+
+    }
+
 }
