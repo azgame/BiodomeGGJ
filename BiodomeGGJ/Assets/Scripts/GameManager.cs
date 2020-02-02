@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject basicEnemy;
     public int spawnIndex;
     public int basehealth;
-
+   
     // Wave timer
     int roundtimer;
     int roundtimermax;
@@ -134,6 +134,7 @@ public class GameManager : MonoBehaviour
         {
             //close game or go back to main menu
             Debug.Log("gameover");
+            Application.Quit();
         }
     }
 
@@ -202,6 +203,7 @@ public class GameManager : MonoBehaviour
     {
         if (m_enemyWaveQ.Count > 0)
         {
+           
             m_eSpawners[spawnIndex].AddObjects(enemy, m_enemyWaveQ.Dequeue());
             Destroy(ui_CardQUI.transform.GetChild(0).gameObject);
         }
