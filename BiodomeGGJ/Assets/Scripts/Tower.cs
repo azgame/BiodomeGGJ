@@ -45,7 +45,7 @@ public abstract class Tower : MonoBehaviour, IInteractable
 
     virtual protected void initialize()
     {
-
+        this.makeBroken();
     }
     
     virtual protected void Update()
@@ -82,6 +82,12 @@ public abstract class Tower : MonoBehaviour, IInteractable
 
 
         
+         if (this.fillCount() >= 3 && myEnemies.Count != 0)
+         {
+            this.gameObject.transform.LookAt(myEnemies[0].transform);
+            transform.LookAt(new Vector3(myEnemies[0].transform.position.x, transform.position.y, myEnemies[0].transform.position.z));
+            attack();
+         }
     }
 
     virtual  protected void attack()
@@ -116,10 +122,34 @@ public abstract class Tower : MonoBehaviour, IInteractable
         }
     }
 
-    virtual  protected void makeBroken()
+    virtual protected void onBreak()
+    {
+        foreach(Transform child in this.transform)
+        {
+            if (child.tag == "RepairedTower") {
+                child.gameObject.SetActive(false);
+            } else if (child.tag == "BrokenTower") {
+                child.gameObject.SetActive(true);
+            }
+        }
+    }
+
+    virtual protected void onRepair()
+    {
+        foreach(Transform child in this.transform)
+        {
+            if (child.tag == "RepairedTower") {
+                child.gameObject.SetActive(true);
+            } else if (child.tag == "BrokenTower") {
+                child.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    virtual protected void makeBroken()
     {
         this.colorRGB.Set(0, 0, 0);
-
+        this.onBreak();
     }
     public float fillCount()
     {
@@ -165,6 +195,9 @@ public abstract class Tower : MonoBehaviour, IInteractable
                         this.colorRGB.z += 1;
                         break;
                     }
+            }
+            if (this.fillCount() == 3) {
+                this.onRepair();
             }
             inventory.consumed();
         }

@@ -25,11 +25,9 @@ public class BasicTower : Tower
         base.maxAmmo = 100;
         base.currentAmmo = maxAmmo;
         base.attackTimeMax = 60.0f;
-        //change these color values values later, just tests
-        base.colorRGB.Set(0, 0, 0);
-        //DO NOT FORGET!!!^^
         base.attackTimeCurrent = attackTimeMax;
 
         base.damage = 10;
+        base.initialize();
     }
 }
