@@ -6,6 +6,7 @@ public abstract class Bullet : MonoBehaviour
 {
    protected int deathtime;
    protected int movementSpeed;
+    public GameObject mytarget;
     public Vector3 colorRGB;
     public int damage;
     // Start is called before the first frame update
@@ -18,6 +19,11 @@ public abstract class Bullet : MonoBehaviour
   virtual  protected void Update()
     {
         transform.position += transform.forward * Time.deltaTime * movementSpeed;
+        if(mytarget)
+        {
+            transform.LookAt(mytarget.transform);
+        }
+       
         deathtime--;
         if(deathtime<=0)
         {

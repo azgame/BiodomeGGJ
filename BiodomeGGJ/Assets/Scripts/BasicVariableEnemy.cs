@@ -18,7 +18,7 @@ public class BasicVariableEnemy : Enemy
     protected override void initilize()
     {
         
-        maxhealth = 100;
+        maxhealth = 500;
         currenthealth = maxhealth;
     }
 }

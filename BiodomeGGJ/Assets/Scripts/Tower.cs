@@ -118,6 +118,7 @@ public abstract class Tower : MonoBehaviour, IInteractable
             Instantiate(bullet,spawnLocation.transform.position,spawnLocation.transform.rotation);
             bullet.GetComponent<Bullet>().colorRGB.Set(colorRGB.x,colorRGB.y,colorRGB.z);
             bullet.GetComponent<Bullet>().damage = damage;
+            bullet.GetComponent<Bullet>().mytarget = myEnemies[0];
             currentAmmo--;
             ammoslider.value = currentAmmo;
 
