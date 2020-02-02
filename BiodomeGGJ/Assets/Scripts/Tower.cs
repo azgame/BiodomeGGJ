@@ -26,7 +26,7 @@ public abstract class Tower : MonoBehaviour, IInteractable
 
     bool isInPickupRange = false;
     bool isInRepairOrReloadRange = false;
-    bool isCarried = true;
+    bool isCarried = false;
 
     // UI Elements
     List<Image> brokenUI = new List<Image>();
@@ -235,7 +235,7 @@ public abstract class Tower : MonoBehaviour, IInteractable
         if (inventory == null) {
             this.isInPickupRange = true;
             return true;
-        } else if (inventory.getInventoryType() != InventoryItem.TOWER) {
+        } else if (inventory.getInventoryType() != InventoryItem.TOWER && !this.isCarried) {
             if (this.fillCount() < 3 || this.hasBlockType(inventory.getInventoryType())) {
                 this.isInRepairOrReloadRange = true;
                 return true;
