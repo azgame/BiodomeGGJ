@@ -80,13 +80,6 @@ public abstract class Tower : MonoBehaviour, IInteractable
     
     virtual protected void Update()
     {
-        
-        if (myEnemies.Count != 0)
-        {
-            this.gameObject.transform.LookAt(myEnemies[0].transform);
-            transform.LookAt(new Vector3(myEnemies[0].transform.position.x, transform.position.y, myEnemies[0].transform.position.z));
-            attack();
-        }
 
         if (currentAmmo <= 0 && this.fillCount() > 2)
         {
@@ -110,14 +103,12 @@ public abstract class Tower : MonoBehaviour, IInteractable
             flashCounter = 0;
         }
 
-
-        
-         if (this.fillCount() >= 3 && myEnemies.Count != 0)
-         {
-            this.gameObject.transform.LookAt(myEnemies[0].transform);
-            transform.LookAt(new Vector3(myEnemies[0].transform.position.x, transform.position.y, myEnemies[0].transform.position.z));
-            attack();
-         }
+        if (this.fillCount() >= 3 && myEnemies.Count != 0)
+        {
+        this.gameObject.transform.LookAt(myEnemies[0].transform);
+        transform.LookAt(new Vector3(myEnemies[0].transform.position.x, transform.position.y, myEnemies[0].transform.position.z));
+        attack();
+        }
     }
 
     virtual  protected void attack()
