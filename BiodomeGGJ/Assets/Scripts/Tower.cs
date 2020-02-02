@@ -39,7 +39,7 @@ public abstract class Tower : MonoBehaviour, IInteractable
             ammoslider.value = currentAmmo;
         }
 
-        flashTimer = 10;
+        flashTimer = 20;
         flashCounter = 0;
     }
 
@@ -58,25 +58,25 @@ public abstract class Tower : MonoBehaviour, IInteractable
         attack();
         }
 
-        if (currentAmmo <= 0)
+        if (currentAmmo <= 0 && this.fillCount() > 2)
         {
             flashCounter++;
-            if (flashCounter % flashTimer == 0)
+            if (flashCounter % flashTimer == 0 || flashCounter % flashTimer == 1)
                 ammoFillColour.color = Color.red;
             else
                 ammoFillColour.color = Color.white;
 
-            if (flashCounter % 100 == 0)
+            if (flashCounter % 50 == 0)
             {
                 flashTimer--;
             }
 
-            if (flashCounter > 800)
+            if (flashCounter > 900)
                 makeBroken();
         }
         else
         {
-            flashTimer = 10;
+            flashTimer = 20;
             flashCounter = 0;
         }
 
@@ -97,7 +97,7 @@ public abstract class Tower : MonoBehaviour, IInteractable
             Instantiate(bullet,spawnLocation.transform.position,spawnLocation.transform.rotation);
             bullet.GetComponent<Bullet>().colorRGB.Set(colorRGB.x,colorRGB.y,colorRGB.z);
             bullet.GetComponent<Bullet>().damage = damage;
-            currentAmmo--;
+            currentAmmo -= 40;
             ammoslider.value = currentAmmo;
 
             attackTimeCurrent = attackTimeMax;
@@ -178,6 +178,8 @@ public abstract class Tower : MonoBehaviour, IInteractable
     virtual protected void makeBroken()
     {
         this.colorRGB.Set(0, 0, 0);
+        this.flashTimer = 20;
+        this.flashCounter = 0;
         this.onBreak();
     }
     public float fillCount()
