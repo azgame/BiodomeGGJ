@@ -53,7 +53,6 @@ public class Player : MonoBehaviour
         if (!isPushed && playerCam != null)
         {
             Vector2 moveVec = new Vector2((cameraForward.x * m_moveDir.y) + (cameraForward.z * m_moveDir.x), (cameraForward.z * m_moveDir.y) - (cameraForward.x * m_moveDir.x));
-            Debug.Log(m_moveDir);
             m_moveComponent.Move(moveVec, dash);
         }
         else

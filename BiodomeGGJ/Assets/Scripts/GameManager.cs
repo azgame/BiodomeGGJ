@@ -125,6 +125,7 @@ public class GameManager : MonoBehaviour
 
         if (numRounds == 0)
             Debug.Log("You win");
+
     }
 
     public void BaseDamage(int damage)
