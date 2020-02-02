@@ -42,19 +42,28 @@ public abstract class Enemy : MonoBehaviour
     }
     public void takeDamage(Vector3 colorRGB,int basedamage)
     {
+        bool isneutral;
+        if(colorRGB==new Vector3(1,1,1))
+        {
+            isneutral = true;
+        }
+        else
+        {
+            isneutral = false;
+        }
         float reddamage = basedamage * colorRGB.x;
-        if(MycolorRGB.y>0)
+        if(MycolorRGB.y>0&&!isneutral)
         {
             reddamage *= MycolorRGB.y;
         }
       
         float greendamage = basedamage * colorRGB.y;
-        if (MycolorRGB.z > 0)
+        if (MycolorRGB.z > 0&&!isneutral)
         {
             greendamage *= MycolorRGB.z;
         }
         float bluedamage = basedamage * colorRGB.z;
-        if (MycolorRGB.x > 0)
+        if (MycolorRGB.x > 0&&!isneutral)
         {
             bluedamage *= MycolorRGB.x;
         }
