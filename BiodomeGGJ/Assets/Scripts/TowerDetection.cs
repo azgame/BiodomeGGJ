@@ -8,8 +8,10 @@ public class TowerDetection : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-
-            this.gameObject.GetComponentInParent<Tower>().myEnemies.Add(other.gameObject);
+            Debug.Log("Enter" + other.gameObject.GetInstanceID());
+            if (!this.gameObject.GetComponentInParent<Tower>().myEnemies.Contains(other.gameObject)) {
+                this.gameObject.GetComponentInParent<Tower>().myEnemies.Add(other.gameObject);
+            }
         }
     }
 
@@ -18,7 +20,7 @@ public class TowerDetection : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy" && this.gameObject.GetComponentInParent<Tower>().myEnemies.Contains(other.gameObject))
         {
-
+            Debug.Log("Exit" + other.gameObject.GetInstanceID());
             this.gameObject.GetComponentInParent<Tower>().myEnemies.Remove(other.gameObject);
         }
     }
