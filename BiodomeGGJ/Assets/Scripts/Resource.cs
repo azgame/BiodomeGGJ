@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ResourceStates
+{
+    SPAWNING,
+    INUSE,
+    DROPPED
+}
+
 public class Resource: MonoBehaviour, IInteractable
 {
     MeshRenderer mr;
