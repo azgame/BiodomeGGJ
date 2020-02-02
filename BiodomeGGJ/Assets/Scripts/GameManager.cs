@@ -6,12 +6,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
-    // Enemy queue
-    // Enemy spawn locations -> gameobject for spawner
-    // Base health
-    // Wave timer
-    // Game timer
-
     public List<Spawner> m_rSpawners;
     public List<Spawner> m_eSpawners;
     public GameObject resource;
@@ -42,7 +36,6 @@ public class GameManager : MonoBehaviour
         {
             s.AddObjects(enemy, spawnObjects);
         }
-
     }
 
     // Update is called once per frame

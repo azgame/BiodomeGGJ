@@ -15,6 +15,9 @@ public abstract class Tower : MonoBehaviour, IInteractable
     [SerializeField]
     protected float attackTimeCurrent;
     public Slider ammoslider;
+    public Image ammoFillColour;
+    int flashCounter;
+    int flashTimer;
     protected int damage;
     public GameObject bullet;
     public GameObject spawnLocation;
@@ -27,6 +30,7 @@ public abstract class Tower : MonoBehaviour, IInteractable
 
     virtual protected void Start()
     {
+        
         myEnemies=new List<GameObject>();
         myEnemies.Clear();
         if(ammoslider)
@@ -34,6 +38,9 @@ public abstract class Tower : MonoBehaviour, IInteractable
             ammoslider.maxValue = maxAmmo;
             ammoslider.value = currentAmmo;
         }
+
+        flashTimer = 10;
+        flashCounter = 0;
     }
 
     virtual protected void initialize()
@@ -44,12 +51,37 @@ public abstract class Tower : MonoBehaviour, IInteractable
     virtual protected void Update()
     {
         
-         if (myEnemies.Count != 0)
-         {
-            this.gameObject.transform.LookAt(myEnemies[0].transform);
-            transform.LookAt(new Vector3(myEnemies[0].transform.position.x, transform.position.y, myEnemies[0].transform.position.z));
-            attack();
-         }
+        if (myEnemies.Count != 0)
+        {
+        this.gameObject.transform.LookAt(myEnemies[0].transform);
+        transform.LookAt(new Vector3(myEnemies[0].transform.position.x, transform.position.y, myEnemies[0].transform.position.z));
+        attack();
+        }
+
+        if (currentAmmo <= 0)
+        {
+            flashCounter++;
+            if (flashCounter % flashTimer == 0)
+                ammoFillColour.color = Color.red;
+            else
+                ammoFillColour.color = Color.white;
+
+            if (flashCounter % 100 == 0)
+            {
+                flashTimer--;
+            }
+
+            if (flashCounter > 800)
+                makeBroken();
+        }
+        else
+        {
+            flashTimer = 10;
+            flashCounter = 0;
+        }
+
+
+        
     }
 
     virtual  protected void attack()
@@ -63,10 +95,6 @@ public abstract class Tower : MonoBehaviour, IInteractable
             ammoslider.value = currentAmmo;
 
             attackTimeCurrent = attackTimeMax;
-            if(currentAmmo<=0)
-            {
-                makeBroken();
-            }
         }
          if (attackTimeCurrent>=0)
         {
@@ -91,6 +119,7 @@ public abstract class Tower : MonoBehaviour, IInteractable
     virtual  protected void makeBroken()
     {
         this.colorRGB.Set(0, 0, 0);
+
     }
     public float fillCount()
     {
