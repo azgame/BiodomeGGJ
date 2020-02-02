@@ -197,7 +197,7 @@ public class GameManager : MonoBehaviour
     void NextItem()
     {
         spawnIndex++;
-        spawnIndex %= m_rSpawners.Count;
+        spawnIndex %= m_eSpawners.Count;
     }
 
     void PreviousItem()
