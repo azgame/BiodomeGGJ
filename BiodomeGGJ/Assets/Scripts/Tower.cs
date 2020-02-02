@@ -115,10 +115,10 @@ public abstract class Tower : MonoBehaviour, IInteractable
     {
         if (this.fillCount() >= 3 && attackTimeCurrent <= 0 && currentAmmo > 0 )
         {
-            Instantiate(bullet,spawnLocation.transform.position,spawnLocation.transform.rotation);
-            bullet.GetComponent<Bullet>().colorRGB.Set(colorRGB.x,colorRGB.y,colorRGB.z);
-            bullet.GetComponent<Bullet>().damage = damage;
-            bullet.GetComponent<Bullet>().mytarget = myEnemies[0];
+           GameObject bull= Instantiate(bullet,spawnLocation.transform.position,spawnLocation.transform.rotation);
+            bull.GetComponent<Bullet>().colorRGB.Set(colorRGB.x,colorRGB.y,colorRGB.z);
+            bull.GetComponent<Bullet>().damage = damage;
+            bull.GetComponent<Bullet>().mytarget = myEnemies[0];
             currentAmmo--;
             ammoslider.value = currentAmmo;
 
