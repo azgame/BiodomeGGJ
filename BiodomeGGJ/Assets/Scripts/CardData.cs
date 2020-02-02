@@ -16,5 +16,7 @@ public class CardData : MonoBehaviour
     public void SetWave(List<InventoryItem> wave_)
     {
         wave = wave_;
+
+        
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
@@ -24,6 +25,8 @@ public class GameManager : MonoBehaviour
     int roundbreaklengthmax;
     int numRounds;
 
+    int enemySpawnNum;
+
     [SerializeField]
     bool onbreak;
 
@@ -40,16 +43,18 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         numRounds = 10;
-        spawntimemax = 300;
-        roundtimermax = 3600;
-        roundtimer = 300;
-        roundbreaklengthmax = 1800;
+        spawntimemax = 2400;
+        roundtimermax = 3600 * 3;
+        roundtimer = 10000;
+        roundbreaklengthmax = 1800 * 3;
         roundbreaklength = roundbreaklengthmax;
         onbreak = true;
         spawntime = -1;
+        enemySpawnNum = 24;
 
         Queue<InventoryItem> spawnObjects = new Queue<InventoryItem>();
-        
+
+
         foreach (InventoryItem type in Enum.GetValues(typeof(InventoryItem)))
         {
             if (type != InventoryItem.TOWER)
@@ -72,9 +77,9 @@ public class GameManager : MonoBehaviour
         //}
 
         m_enemyWaveQ = new Queue<List<InventoryItem>>();
-        CreateQueue(8);
-        CreateQueue(8);
-        CreateQueue(8);
+        CreateQueue(enemySpawnNum);
+        CreateQueue(enemySpawnNum);
+        CreateQueue(enemySpawnNum);
     }
 
     // Update is called once per frame
@@ -85,7 +90,7 @@ public class GameManager : MonoBehaviour
             if (spawntime < 0)
             {
                 SpawnEnemy();
-                CreateQueue(8);
+                CreateQueue(enemySpawnNum);
                 spawntime = spawntimemax;
             }
             spawntime--;
@@ -151,6 +156,30 @@ public class GameManager : MonoBehaviour
         }
 
         m_enemyWaveQ.Enqueue(enemyList);
+        GameObject card = Instantiate(ui_Card, ui_CardQUI.transform);
+
+        foreach (InventoryItem item in enemyList)
+        {
+            GameObject image = new GameObject();
+            Image enemyType = image.AddComponent<Image>();
+
+            GameObject cardSlot = Instantiate(image, card.transform);
+            
+            switch (item)
+            {
+                case InventoryItem.BLUE:
+                    cardSlot.GetComponent<Image>().color = Color.blue;
+                    break;
+                case InventoryItem.RED:
+                    cardSlot.GetComponent<Image>().color = Color.red;
+                    break;
+                case InventoryItem.GREEN:
+                    cardSlot.GetComponent<Image>().color = Color.green;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     void SpawnEnemy()
@@ -158,6 +187,7 @@ public class GameManager : MonoBehaviour
         if (m_enemyWaveQ.Count > 0)
         {
             m_eSpawners[spawnIndex].AddObjects(enemy, m_enemyWaveQ.Dequeue());
+            Destroy(ui_CardQUI.transform.GetChild(0).gameObject);
         }
 
         NextItem();
