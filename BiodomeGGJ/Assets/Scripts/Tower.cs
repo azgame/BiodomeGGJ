@@ -28,6 +28,10 @@ public abstract class Tower : MonoBehaviour, IInteractable
     bool isInRepairRange = false;
     bool isCarried = true;
 
+    // UI Elements
+    List<Image> brokenUI = new List<Image>();
+    List<Image> repairedUI = new List<Image>();
+
     virtual protected void Start()
     {
         
@@ -45,6 +49,18 @@ public abstract class Tower : MonoBehaviour, IInteractable
 
     virtual protected void initialize()
     {
+        foreach(Transform child in this.transform) {
+            if (child.tag == "BrokenTower") {
+                foreach(Transform gChild in child) {
+                    if (gChild.tag == "TowerRepairUI") {
+                        foreach(Transform ggChild in gChild) {
+                            Image i = ggChild.GetComponent<Image>();
+                            brokenUI.Add(i);
+                        }
+                    }
+                }
+            }
+        }
         this.makeBroken();
     }
     
@@ -131,6 +147,9 @@ public abstract class Tower : MonoBehaviour, IInteractable
             } else if (child.tag == "BrokenTower") {
                 child.gameObject.SetActive(true);
             }
+            foreach(Image i in this.brokenUI) {
+                i.color = new Color(200, 200, 200);
+            }
         }
     }
 
@@ -148,7 +167,7 @@ public abstract class Tower : MonoBehaviour, IInteractable
 
     virtual protected void onRepair(InventoryItem resourceType)
     {
-        Color newColor;
+        Color newColor = new Color();
         switch (resourceType) {
             case InventoryItem.RED:
                 {
@@ -169,7 +188,7 @@ public abstract class Tower : MonoBehaviour, IInteractable
                     break;
                 }
         }
-        
+        this.brokenUI[(int)this.fillCount() - 1].color = newColor;
         if (this.fillCount() == 3) {
             this.onRepairComplete();
         }

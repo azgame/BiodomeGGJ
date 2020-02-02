@@ -26,7 +26,7 @@ public class Spawner : MonoBehaviour
 
         index = 0;
         spawnTimer = 0;
-        spawnRate = 900;
+        spawnRate = 400;
     }
 
     // Update is called once per frame
