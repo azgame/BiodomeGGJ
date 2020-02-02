@@ -134,7 +134,7 @@ public abstract class Tower : MonoBehaviour, IInteractable
         }
     }
 
-    virtual protected void onRepair()
+    virtual protected void onRepairComplete()
     {
         foreach(Transform child in this.transform)
         {
@@ -143,6 +143,35 @@ public abstract class Tower : MonoBehaviour, IInteractable
             } else if (child.tag == "BrokenTower") {
                 child.gameObject.SetActive(false);
             }
+        }
+    }
+
+    virtual protected void onRepair(InventoryItem resourceType)
+    {
+        Color newColor;
+        switch (resourceType) {
+            case InventoryItem.RED:
+                {
+                    this.colorRGB.x += 1;
+                    newColor = new Color(255, 0, 0, 100);
+                    break;
+                }
+            case InventoryItem.GREEN:
+                {
+                    this.colorRGB.y += 1;
+                    newColor = new Color(0, 255, 0, 100);
+                    break;
+                }
+            case InventoryItem.BLUE:
+                {
+                    this.colorRGB.z += 1;
+                    newColor = new Color(0, 0, 255, 100);
+                    break;
+                }
+        }
+        
+        if (this.fillCount() == 3) {
+            this.onRepairComplete();
         }
     }
 
@@ -179,26 +208,7 @@ public abstract class Tower : MonoBehaviour, IInteractable
             this.makeBroken();
             return this;
         } else if (inventory.getInventoryType() != InventoryItem.TOWER && this.fillCount() < 3) {
-            switch (inventory.getInventoryType()) {
-                case InventoryItem.RED:
-                    {
-                        this.colorRGB.x += 1;
-                        break;
-                    }
-                case InventoryItem.GREEN:
-                    {
-                        this.colorRGB.y += 1;
-                        break;
-                    }
-                case InventoryItem.BLUE:
-                    {
-                        this.colorRGB.z += 1;
-                        break;
-                    }
-            }
-            if (this.fillCount() == 3) {
-                this.onRepair();
-            }
+            this.onRepair(inventory.getInventoryType());
             inventory.consumed();
         }
         return null;
