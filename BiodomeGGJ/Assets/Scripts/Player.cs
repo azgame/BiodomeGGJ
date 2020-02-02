@@ -10,7 +10,11 @@ public class Player : MonoBehaviour
     // Components
     PlayerMove m_moveComponent;
     PlayerInputActions m_inputActions;
+    public Camera playerCam;
+    public Camera cameraPrefab;
+
     Rigidbody rb;
+
     public GameObject holdSpace;
     IInteractable nearInteractable;
 
@@ -18,6 +22,8 @@ public class Player : MonoBehaviour
 
     // Internal
     Vector2 m_moveDir;
+    public Vector2 lookDir;
+    Vector3 cameraForward;
     bool isPushed;
     float interact;
     float dash;
@@ -30,15 +36,27 @@ public class Player : MonoBehaviour
         m_moveComponent = GetComponent<PlayerMove>();
         isPushed = false;
         dashTimer = 0;
+        Camera camera = Instantiate(cameraPrefab);
+        camera.GetComponent<CameraController>().target = this.gameObject;
+        playerCam = camera;
+        this.gameObject.GetComponent<PlayerInput>().camera = playerCam;
         rb = GetComponent<Rigidbody>();
+
     }
 
 
     void Update()
     {
+        if (playerCam != null)
+            cameraForward = playerCam.transform.forward;
+
         // Movement
-        if (!isPushed)
-            m_moveComponent.Move(m_moveDir, dash);
+        if (!isPushed && playerCam != null)
+        {
+            Vector2 moveVec = new Vector2((cameraForward.x * m_moveDir.y) + (cameraForward.z * m_moveDir.x), (cameraForward.z * m_moveDir.y) - (cameraForward.x * m_moveDir.x));
+            Debug.Log(m_moveDir);
+            m_moveComponent.Move(moveVec, dash);
+        }
         else
         {
             // Hardcoded timer for if player has collided with another player,
@@ -53,14 +71,23 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void SetForward(Vector3 forward_)
+    {
+        cameraForward = forward_;
+    }
 
     /// Unity Input Events -----------------------------------
+
     // Move Action
     public void Move(InputAction.CallbackContext context)
     {
         m_moveDir = context.ReadValue<Vector2>();
     }
 
+    public void Look(InputAction.CallbackContext context)
+    {
+        lookDir = context.ReadValue<Vector2>();
+    }
     // Interact Action
     public void Interact(InputAction.CallbackContext context)
     {
@@ -86,6 +113,8 @@ public class Player : MonoBehaviour
     /// Collision Events --------------------------------------
     public void OnCollisionEnter(Collision collision)
     {
+        rb.angularVelocity = new Vector3(rb.angularVelocity.x, 0, rb.angularVelocity.z);
+        gameObject.transform.localEulerAngles = new Vector3(0, 0, 0);
         if (collision.gameObject.tag == "Player")
         {
             Vector3 otherPos = collision.gameObject.transform.position;
@@ -96,7 +125,16 @@ public class Player : MonoBehaviour
             
         }
     }
-
+    public void OnCollisionExit(Collision collision)
+    {
+        rb.angularVelocity = new Vector3(rb.angularVelocity.x, 0, rb.angularVelocity.z);
+        gameObject.transform.localEulerAngles = new Vector3(0, 0, 0);
+    }
+    public void OnCollisionStay(Collision collision)
+    {
+        rb.angularVelocity = new Vector3(rb.angularVelocity.x, 0, rb.angularVelocity.z);
+        gameObject.transform.localEulerAngles = new Vector3(0, 0, 0);
+    }
     /// Trigger Events --------------------------------------
     public void OnTriggerEnter(Collider other)
     {

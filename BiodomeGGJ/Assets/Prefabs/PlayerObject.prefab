@@ -61,7 +61,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5170167680272010050}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.22, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9076211317217125631}
@@ -142,18 +142,7 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5170167680272010055}
-        m_MethodName: Move
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: f19ed8fb-ed2e-423a-8b2e-8fac69bb4737
     m_ActionName: Player/Move
   - m_PersistentCalls:
@@ -238,11 +227,79 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 65eb40a4-ad35-4b20-8ab5-afa79ea5a1a1
     m_ActionName: Player/Dash[/Keyboard/space,/XInputControllerWindows/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3cf0b8e5-adbe-440e-b262-f182eafe075e
+    m_ActionName: Player/Join
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5170167680272010055}
+        m_MethodName: Move
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 82163adb-cd4c-49f4-ade9-af61f9caef96
+    m_ActionName: PlayerGamePad/Move[/XInputControllerWindows/leftStick,/DualShock4GamepadHID/leftStick]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5170167680272010055}
+        m_MethodName: Look
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c7890b88-e3e6-48a3-909a-5a51f07ddfb5
+    m_ActionName: PlayerGamePad/Look[/XInputControllerWindows/rightStick,/DualShock4GamepadHID/rightStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e45b0750-f5ed-46aa-9d99-4272a3310015
+    m_ActionName: PlayerGamePad/Fire[/XInputControllerWindows/rightTrigger,/DualShock4GamepadHID/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5170167680272010055}
+        m_MethodName: Interact
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 22d2a404-63bb-49f3-a38e-5a4e68856962
+    m_ActionName: PlayerGamePad/Interact[/XInputControllerWindows/buttonSouth,/DualShock4GamepadHID/buttonSouth,/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5170167680272010055}
+        m_MethodName: Dash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ecc1fd8c-8a71-47c1-b0fd-ddd4b7b16d7a
+    m_ActionName: PlayerGamePad/Dash[/Keyboard/space,/XInputControllerWindows/buttonWest,/DualShock4GamepadHID/buttonWest]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: PlayerGamePad
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 485239355456997273, guid: 7e58e48b6739ede4e8a383c4bebf9269, type: 3}
 --- !u!114 &5170167680272010055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,7 +312,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f451ea102d570b44cb465a30dda9a920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCam: {fileID: 0}
+  cameraPrefab: {fileID: 485239355456997273, guid: 7e58e48b6739ede4e8a383c4bebf9269,
+    type: 3}
   holdSpace: {fileID: 2874305229910609069}
+  lookDir: {x: 0, y: 0}
 --- !u!54 &5170167680272010053
 Rigidbody:
   m_ObjectHideFlags: 0

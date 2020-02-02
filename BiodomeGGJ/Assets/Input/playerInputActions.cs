@@ -57,6 +57,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Join"",
+                    ""type"": ""Button"",
+                    ""id"": ""3cf0b8e5-adbe-440e-b262-f182eafe075e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -316,6 +324,208 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""cddc779b-d5ea-4cde-83dc-4e28335f8152"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c0808a46-6aea-45fa-b6a8-36de48e3742e"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Join"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""PlayerGamePad"",
+            ""id"": ""75c40a47-7845-4af5-b04f-f79171f0f224"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""82163adb-cd4c-49f4-ade9-af61f9caef96"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""c7890b88-e3e6-48a3-909a-5a51f07ddfb5"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""e45b0750-f5ed-46aa-9d99-4272a3310015"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""22d2a404-63bb-49f3-a38e-5a4e68856962"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""ecc1fd8c-8a71-47c1-b0fd-ddd4b7b16d7a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""f880056d-7c2e-4913-b5df-a499acd5a7c6"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""155475f3-37bf-4f79-be17-25ccc05f6355"",
+                    ""path"": ""<XRController>/{Primary2DAxis}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XR"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3ed28ab7-a11a-4122-ab01-4383480ad44b"",
+                    ""path"": ""<Joystick>/stick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Joystick"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""506c840d-df99-4bbc-8c60-4ef268cc97bb"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""decbb961-28a2-4a42-a8d0-4e800ccfe465"",
+                    ""path"": ""<Joystick>/{Hatswitch}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Joystick"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eea7ef28-0278-4984-aa2b-3ae223ef37eb"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1481cced-e478-47f6-be64-2731e0f922f8"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Touch"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""011a0d11-12e3-4745-b534-a7e7c7711e7e"",
+                    ""path"": ""<Joystick>/trigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Joystick"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4a116626-ce4a-472e-b2bf-7b77c9e81ecb"",
+                    ""path"": ""<XRController>/{PrimaryAction}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XR"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""91bf167c-f9ef-43c0-9ec1-ab19797cdff1"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5cfe94ae-90e6-4258-89aa-f97486674bba"",
+                    ""path"": ""<Keyboard>/#(Q)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""01eaf88e-79cc-4e1b-bf90-8f2520bfb1ea"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ac8a700-c662-4b4b-a249-191693968c84"",
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -900,6 +1110,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_Join = m_Player.FindAction("Join", throwIfNotFound: true);
+        // PlayerGamePad
+        m_PlayerGamePad = asset.FindActionMap("PlayerGamePad", throwIfNotFound: true);
+        m_PlayerGamePad_Move = m_PlayerGamePad.FindAction("Move", throwIfNotFound: true);
+        m_PlayerGamePad_Look = m_PlayerGamePad.FindAction("Look", throwIfNotFound: true);
+        m_PlayerGamePad_Fire = m_PlayerGamePad.FindAction("Fire", throwIfNotFound: true);
+        m_PlayerGamePad_Interact = m_PlayerGamePad.FindAction("Interact", throwIfNotFound: true);
+        m_PlayerGamePad_Dash = m_PlayerGamePad.FindAction("Dash", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -967,6 +1185,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_Join;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -976,6 +1195,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputAction @Join => m_Wrapper.m_Player_Join;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1000,8 +1220,79 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @Join.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJoin;
+                @Join.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJoin;
+                @Join.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJoin;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
+                @Fire.started += instance.OnFire;
+                @Fire.performed += instance.OnFire;
+                @Fire.canceled += instance.OnFire;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
+                @Join.started += instance.OnJoin;
+                @Join.performed += instance.OnJoin;
+                @Join.canceled += instance.OnJoin;
+            }
+        }
+    }
+    public PlayerActions @Player => new PlayerActions(this);
+
+    // PlayerGamePad
+    private readonly InputActionMap m_PlayerGamePad;
+    private IPlayerGamePadActions m_PlayerGamePadActionsCallbackInterface;
+    private readonly InputAction m_PlayerGamePad_Move;
+    private readonly InputAction m_PlayerGamePad_Look;
+    private readonly InputAction m_PlayerGamePad_Fire;
+    private readonly InputAction m_PlayerGamePad_Interact;
+    private readonly InputAction m_PlayerGamePad_Dash;
+    public struct PlayerGamePadActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public PlayerGamePadActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_PlayerGamePad_Move;
+        public InputAction @Look => m_Wrapper.m_PlayerGamePad_Look;
+        public InputAction @Fire => m_Wrapper.m_PlayerGamePad_Fire;
+        public InputAction @Interact => m_Wrapper.m_PlayerGamePad_Interact;
+        public InputAction @Dash => m_Wrapper.m_PlayerGamePad_Dash;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerGamePad; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerGamePadActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerGamePadActions instance)
+        {
+            if (m_Wrapper.m_PlayerGamePadActionsCallbackInterface != null)
+            {
+                @Move.started -= m_Wrapper.m_PlayerGamePadActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_PlayerGamePadActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_PlayerGamePadActionsCallbackInterface.OnMove;
+                @Look.started -= m_Wrapper.m_PlayerGamePadActionsCallbackInterface.OnLook;
+                @Look.performed -= m_Wrapper.m_PlayerGamePadActionsCallbackInterface.OnLook;
+                @Look.canceled -= m_Wrapper.m_PlayerGamePadActionsCallbackInterface.OnLook;
+                @Fire.started -= m_Wrapper.m_PlayerGamePadActionsCallbackInterface.OnFire;
+                @Fire.performed -= m_Wrapper.m_PlayerGamePadActionsCallbackInterface.OnFire;
+                @Fire.canceled -= m_Wrapper.m_PlayerGamePadActionsCallbackInterface.OnFire;
+                @Interact.started -= m_Wrapper.m_PlayerGamePadActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerGamePadActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerGamePadActionsCallbackInterface.OnInteract;
+                @Dash.started -= m_Wrapper.m_PlayerGamePadActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_PlayerGamePadActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_PlayerGamePadActionsCallbackInterface.OnDash;
+            }
+            m_Wrapper.m_PlayerGamePadActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Move.started += instance.OnMove;
@@ -1022,7 +1313,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
             }
         }
     }
-    public PlayerActions @Player => new PlayerActions(this);
+    public PlayerGamePadActions @PlayerGamePad => new PlayerGamePadActions(this);
 
     // UI
     private readonly InputActionMap m_UI;
@@ -1182,6 +1473,15 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         }
     }
     public interface IPlayerActions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
+        void OnJoin(InputAction.CallbackContext context);
+    }
+    public interface IPlayerGamePadActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
