@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     public Camera playerCam;
     public Camera cameraPrefab;
 
+    Rigidbody rb;
+
     public GameObject holdSpace;
     IInteractable nearInteractable;
 
@@ -38,6 +40,8 @@ public class Player : MonoBehaviour
         camera.GetComponent<CameraController>().target = this.gameObject;
         playerCam = camera;
         this.gameObject.GetComponent<PlayerInput>().camera = playerCam;
+        rb = GetComponent<Rigidbody>();
+
     }
 
 
@@ -109,15 +113,28 @@ public class Player : MonoBehaviour
     /// Collision Events --------------------------------------
     public void OnCollisionEnter(Collision collision)
     {
+        rb.angularVelocity = new Vector3(rb.angularVelocity.x, 0, rb.angularVelocity.z);
+        gameObject.transform.localEulerAngles = new Vector3(0, 0, 0);
         if (collision.gameObject.tag == "Player")
         {
             Vector3 otherPos = collision.gameObject.transform.position;
             Vector3 collisionDir = this.transform.position - otherPos;
             m_moveComponent.Move(collisionDir, 1.0f);
             isPushed = true;
+            
+            
         }
     }
-
+    public void OnCollisionExit(Collision collision)
+    {
+        rb.angularVelocity = new Vector3(rb.angularVelocity.x, 0, rb.angularVelocity.z);
+        gameObject.transform.localEulerAngles = new Vector3(0, 0, 0);
+    }
+    public void OnCollisionStay(Collision collision)
+    {
+        rb.angularVelocity = new Vector3(rb.angularVelocity.x, 0, rb.angularVelocity.z);
+        gameObject.transform.localEulerAngles = new Vector3(0, 0, 0);
+    }
     /// Trigger Events --------------------------------------
     public void OnTriggerEnter(Collider other)
     {
