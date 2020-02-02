@@ -142,7 +142,7 @@ public class GameManager : MonoBehaviour
     { 
         basehealth -= damage;
         basehealthslider.value = basehealth;
-        if(basehealth < 0)
+        if (basehealth < 0)
         {
             //close game or go back to main menu
             Debug.Log("gameover");
@@ -152,25 +152,31 @@ public class GameManager : MonoBehaviour
 
     void CreateQueue(int totalunits)
     {
+        Queue<InventoryItem> blueList = new Queue<InventoryItem>();
+        Queue<InventoryItem> redList = new Queue<InventoryItem>();
+        Queue<InventoryItem> greenList = new Queue<InventoryItem>();
         List<InventoryItem> enemyList = new List<InventoryItem>();
         for (int i = 0; i < totalunits; i++)
         {
             int rInt = Random.Range(0, 3);
-            int spawnVal = rInt + (waveIndex % 3) * 3;
+            int spawnVal = rInt + ((waveIndex + 3) % 3) * 3;
 
             if (spawnVal == 0 || spawnVal == 3 || spawnVal == 6)
             {
-                enemyList.Add(InventoryItem.BLUE);
+                blueList.Enqueue(InventoryItem.BLUE);
             }
             else if (spawnVal == 1 || spawnVal == 4 || spawnVal == 7)
             {
-                enemyList.Add(InventoryItem.RED);
+                redList.Enqueue(InventoryItem.RED);
             }
             else if (spawnVal == 2 || spawnVal == 5 || spawnVal == 8)
             {
-                enemyList.Add(InventoryItem.GREEN);
+                greenList.Enqueue(InventoryItem.GREEN);
             }
         }
+
+        while (blueList.Count > 0)
+            enemyList.Add(blueList.Dequeue());
 
         m_enemyWaveQ.Enqueue(enemyList);
         GameObject card = Instantiate(ui_Card, ui_CardQUI.transform);
@@ -181,7 +187,7 @@ public class GameManager : MonoBehaviour
             Image enemyType = image.AddComponent<Image>();
 
             GameObject cardSlot = Instantiate(image, card.transform);
-            
+
             switch (item)
             {
                 case InventoryItem.BLUE:
