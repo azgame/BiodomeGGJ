@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     int roundbreaklength;
     int roundbreaklengthmax;
     int numRounds;
+    int waveIndex;
 
     int enemySpawnNum;
 
@@ -44,13 +45,14 @@ public class GameManager : MonoBehaviour
     {
         numRounds = 10;
         spawntimemax = 2400;
-        roundtimermax = 3600 * 3;
-        roundtimer = 10000;
-        roundbreaklengthmax = 1800 * 3;
+        roundtimermax = spawntimemax * 4;
+        roundtimer = roundtimermax;
+        roundbreaklengthmax = spawntimemax * 2;
         roundbreaklength = roundbreaklengthmax;
         onbreak = true;
         spawntime = -1;
         enemySpawnNum = 24;
+        waveIndex = 0;
 
         Queue<InventoryItem> spawnObjects = new Queue<InventoryItem>();
 
@@ -92,6 +94,7 @@ public class GameManager : MonoBehaviour
                 SpawnEnemy();
                 CreateQueue(enemySpawnNum);
                 spawntime = spawntimemax;
+                waveIndex++;
             }
             spawntime--;
             roundtimer--;
@@ -139,19 +142,19 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < totalunits; i++)
         {
             int rInt = Random.Range(0, 3);
-            switch (rInt)
+            int spawnVal = rInt + (waveIndex % 3) * 3;
+
+            if (spawnVal == 0 || spawnVal == 3 || spawnVal == 6)
             {
-            case 0:
                 enemyList.Add(InventoryItem.BLUE);
-                break;
-            case 1:
+            }
+            else if (spawnVal == 1 || spawnVal == 4 || spawnVal == 7)
+            {
                 enemyList.Add(InventoryItem.RED);
-                break;
-            case 2:
+            }
+            else if (spawnVal == 2 || spawnVal == 5 || spawnVal == 8)
+            {
                 enemyList.Add(InventoryItem.GREEN);
-                break;
-            default:
-                break;
             }
         }
 
