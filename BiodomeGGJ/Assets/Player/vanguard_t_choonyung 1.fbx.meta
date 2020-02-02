@@ -3,7 +3,32 @@ guid: ad5dfcbe500be434695e30c7b14999d7
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: VanguardBodyMat
+    second: {fileID: 2100000, guid: fb73b7f358efbf34aa0dfde5b792ef82, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vanguard_VisorMat
+    second: {fileID: 2100000, guid: 1587e50268903c049a14571cc8238cc0, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: vanguard_diffuse
+    second: {fileID: 2800000, guid: 8058f8d787a7bed4ebbf323a3dcf04f5, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: vanguard_normal
+    second: {fileID: 2800000, guid: 135881972e8733041bd919a2762e206d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: vanguard_specular
+    second: {fileID: 2800000, guid: b3920b4d75bf534439d749f50957c5a4, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0
