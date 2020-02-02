@@ -9,6 +9,8 @@ TagManager:
   - InteractiveObject
   - Resource
   - Tower
+  - RepairedTower
+  - BrokenTower
   layers:
   - Default
   - TransparentFX
