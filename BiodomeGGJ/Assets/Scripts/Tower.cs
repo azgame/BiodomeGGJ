@@ -25,7 +25,7 @@ public abstract class Tower : MonoBehaviour, IInteractable
     //float ammo;
 
     bool isInPickupRange = false;
-    bool isInRepairRange = false;
+    bool isInRepairOrReloadRange = false;
     bool isCarried = true;
 
     // UI Elements
@@ -141,8 +141,11 @@ public abstract class Tower : MonoBehaviour, IInteractable
         
     }
 
-   
-   
+    virtual  protected void reload()
+    {
+        this.currentAmmo = this.maxAmmo;
+        ammoslider.value = currentAmmo;
+    }
 
     public void EnemyDeath(GameObject deadenemy)
     {
@@ -222,14 +225,29 @@ public abstract class Tower : MonoBehaviour, IInteractable
     {
         return colorRGB.x + colorRGB.y + colorRGB.z;
     }
+
+    public bool hasBlockType(InventoryItem resourceType) {
+        switch (resourceType) {
+            case InventoryItem.RED: 
+                return this.colorRGB.x > 0;
+            case InventoryItem.GREEN:
+                return this.colorRGB.y > 0;
+            case InventoryItem.BLUE:
+                return this.colorRGB.z > 0;
+            default:
+                return false;
+        }
+    }
     public bool wasTriggered(IInteractable inventory)
     {
         if (inventory == null) {
             this.isInPickupRange = true;
             return true;
         } else if (inventory.getInventoryType() != InventoryItem.TOWER) {
-            this.isInRepairRange = true;
-            return true;
+            if (this.fillCount() < 3 || this.hasBlockType(inventory.getInventoryType())) {
+                this.isInRepairOrReloadRange = true;
+                return true;
+            }
         }
         return false;
     }
@@ -245,8 +263,12 @@ public abstract class Tower : MonoBehaviour, IInteractable
             this.isCarried = true;
             this.makeBroken();
             return this;
-        } else if (inventory.getInventoryType() != InventoryItem.TOWER && this.fillCount() < 3) {
-            this.onRepair(inventory.getInventoryType());
+        } else if (inventory.getInventoryType() != InventoryItem.TOWER) {
+            if (this.fillCount() < 3) {
+                this.onRepair(inventory.getInventoryType());
+            } else {
+                this.reload();
+            }
             inventory.consumed();
         }
         return null;
