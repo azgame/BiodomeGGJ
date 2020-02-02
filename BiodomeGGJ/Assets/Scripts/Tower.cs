@@ -15,6 +15,9 @@ public abstract class Tower : MonoBehaviour, IInteractable
     [SerializeField]
     protected float attackTimeCurrent;
     public Slider ammoslider;
+    public Image ammoFillColour;
+    int flashCounter;
+    int flashTimer;
     protected int damage;
     public GameObject bullet;
     public GameObject spawnLocation;
@@ -27,6 +30,7 @@ public abstract class Tower : MonoBehaviour, IInteractable
 
     virtual protected void Start()
     {
+        
         myEnemies=new List<GameObject>();
         myEnemies.Clear();
         if(ammoslider)
@@ -34,6 +38,9 @@ public abstract class Tower : MonoBehaviour, IInteractable
             ammoslider.maxValue = maxAmmo;
             ammoslider.value = currentAmmo;
         }
+
+        flashTimer = 10;
+        flashCounter = 0;
     }
 
     virtual protected void initialize()
@@ -43,6 +50,37 @@ public abstract class Tower : MonoBehaviour, IInteractable
     
     virtual protected void Update()
     {
+        
+        if (myEnemies.Count != 0)
+        {
+        this.gameObject.transform.LookAt(myEnemies[0].transform);
+        transform.LookAt(new Vector3(myEnemies[0].transform.position.x, transform.position.y, myEnemies[0].transform.position.z));
+        attack();
+        }
+
+        if (currentAmmo <= 0)
+        {
+            flashCounter++;
+            if (flashCounter % flashTimer == 0)
+                ammoFillColour.color = Color.red;
+            else
+                ammoFillColour.color = Color.white;
+
+            if (flashCounter % 100 == 0)
+            {
+                flashTimer--;
+            }
+
+            if (flashCounter > 800)
+                makeBroken();
+        }
+        else
+        {
+            flashTimer = 10;
+            flashCounter = 0;
+        }
+
+
         
          if (this.fillCount() >= 3 && myEnemies.Count != 0)
          {
@@ -63,10 +101,6 @@ public abstract class Tower : MonoBehaviour, IInteractable
             ammoslider.value = currentAmmo;
 
             attackTimeCurrent = attackTimeMax;
-            if(currentAmmo<=0)
-            {
-                makeBroken();
-            }
         }
          if (attackTimeCurrent>=0)
         {
@@ -100,7 +134,7 @@ public abstract class Tower : MonoBehaviour, IInteractable
         }
     }
 
-    virtual protected void onRepair()
+    virtual protected void onRepairComplete()
     {
         foreach(Transform child in this.transform)
         {
@@ -109,6 +143,35 @@ public abstract class Tower : MonoBehaviour, IInteractable
             } else if (child.tag == "BrokenTower") {
                 child.gameObject.SetActive(false);
             }
+        }
+    }
+
+    virtual protected void onRepair(InventoryItem resourceType)
+    {
+        Color newColor;
+        switch (resourceType) {
+            case InventoryItem.RED:
+                {
+                    this.colorRGB.x += 1;
+                    newColor = new Color(255, 0, 0, 100);
+                    break;
+                }
+            case InventoryItem.GREEN:
+                {
+                    this.colorRGB.y += 1;
+                    newColor = new Color(0, 255, 0, 100);
+                    break;
+                }
+            case InventoryItem.BLUE:
+                {
+                    this.colorRGB.z += 1;
+                    newColor = new Color(0, 0, 255, 100);
+                    break;
+                }
+        }
+        
+        if (this.fillCount() == 3) {
+            this.onRepairComplete();
         }
     }
 
@@ -145,26 +208,7 @@ public abstract class Tower : MonoBehaviour, IInteractable
             this.makeBroken();
             return this;
         } else if (inventory.getInventoryType() != InventoryItem.TOWER && this.fillCount() < 3) {
-            switch (inventory.getInventoryType()) {
-                case InventoryItem.RED:
-                    {
-                        this.colorRGB.x += 1;
-                        break;
-                    }
-                case InventoryItem.GREEN:
-                    {
-                        this.colorRGB.y += 1;
-                        break;
-                    }
-                case InventoryItem.BLUE:
-                    {
-                        this.colorRGB.z += 1;
-                        break;
-                    }
-            }
-            if (this.fillCount() == 3) {
-                this.onRepair();
-            }
+            this.onRepair(inventory.getInventoryType());
             inventory.consumed();
         }
         return null;

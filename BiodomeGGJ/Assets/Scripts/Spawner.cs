@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour
     GameObject m_spawnObject;
     Queue<InventoryItem> m_spawnType;
     List<GameObject> m_spawnLocations;
-    GameObject spawnIndex;
+    GameObject lastSpawn;
     int spawnRate;
     int spawnTimer;
     int index;
@@ -26,7 +26,7 @@ public class Spawner : MonoBehaviour
 
         index = 0;
         spawnTimer = 0;
-        spawnRate = 300;
+        spawnRate = 900;
     }
 
     // Update is called once per frame
@@ -44,8 +44,9 @@ public class Spawner : MonoBehaviour
         }
 
         if (m_spawnType.Count <= 0)
-            if (m_spawnObject.tag == "Resource")
-                GenerateSpawnQueue();
+            if (m_spawnObject != null)
+                if (m_spawnObject.tag == "Resource")
+                    GenerateSpawnQueue();
     }
 
 
@@ -80,15 +81,21 @@ public class Spawner : MonoBehaviour
             {
                 if (m_spawnObject.tag == "Resource")
                 {
+                    if (lastSpawn != null)
+                    {
+                        lastSpawn.GetComponent<Resource>().SetInventoryType(ResourceStates.INUSE, lastSpawn.GetComponent<Resource>().getInventoryType());
+                    }
+                        
                     InventoryItem itemType = m_spawnType.Dequeue();
-                    Instantiate(m_spawnObject, m_spawnLocations[index].transform);
-                    m_spawnObject.GetComponent<Resource>().SetInventoryType(itemType);
+                    GameObject go = Instantiate(m_spawnObject, m_spawnLocations[index].transform);
+                    go.GetComponent<Resource>().SetInventoryType(ResourceStates.SPAWNING, itemType);
+                    lastSpawn = go;
                 }
                 else
                 {
                     InventoryItem itemType = m_spawnType.Dequeue();
-                    Instantiate(m_spawnObject, m_spawnLocations[index].transform);
-                    m_spawnObject.GetComponent<Enemy>().SetInventoryType(itemType);
+                    GameObject go = Instantiate(m_spawnObject, m_spawnLocations[index].transform);
+                    go.GetComponent<Enemy>().SetInventoryType(itemType);
                 }
                 
                 break;

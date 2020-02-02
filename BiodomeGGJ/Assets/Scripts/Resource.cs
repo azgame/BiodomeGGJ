@@ -20,6 +20,7 @@ public class Resource: MonoBehaviour, IInteractable
     bool wasConsumed = false;
 
     InventoryItem inventoryType;
+    ResourceStates rState;
 
     // Start is called before the first frame update
     void Start()
@@ -36,20 +37,39 @@ public class Resource: MonoBehaviour, IInteractable
         }
     }
 
-    public void SetInventoryType(InventoryItem type)
+    public void SetInventoryType(ResourceStates state, InventoryItem type)
     {
         mr = GetComponent<MeshRenderer>();
         inventoryType = type;
         switch (type)
         {
             case InventoryItem.RED:
-                mr.material = Resources.Load("Materials/RedMat", typeof(Material)) as Material;
+                UpdateMaterial(state, "RedMat");
                 break;
             case InventoryItem.GREEN:
-                mr.material = Resources.Load("Materials/GreenMat", typeof(Material)) as Material;
+                UpdateMaterial(state, "GreenMat");
                 break;
             case InventoryItem.BLUE:
-                mr.material = Resources.Load("Materials/BlueMat", typeof(Material)) as Material;
+                UpdateMaterial(state, "BlueMat");
+                break;
+            default:
+                break;
+        }
+
+        //mr.material.color = new Color(mr.material.color.r, mr.material.color.g, mr.material.color.b, 0.5f);
+        rState = state;
+    }
+
+    void UpdateMaterial(ResourceStates state, string matPath)
+    {
+        mr = GetComponent<MeshRenderer>();
+        switch (state)
+        {
+            case ResourceStates.SPAWNING:
+                mr.material = Resources.Load("Materials/" + matPath + "HalfA", typeof(Material)) as Material;
+                break;
+            case ResourceStates.INUSE:
+                mr.material = Resources.Load("Materials/" + matPath, typeof(Material)) as Material;
                 break;
             default:
                 break;
@@ -72,7 +92,7 @@ public class Resource: MonoBehaviour, IInteractable
 
     public IInteractable activated(IInteractable inventory)
     {
-        if (inventory == null) {
+        if (inventory == null && rState != ResourceStates.SPAWNING) {
             this.isActive = true;
             return this;
         }
