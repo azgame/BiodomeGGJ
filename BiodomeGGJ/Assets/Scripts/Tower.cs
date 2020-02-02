@@ -266,10 +266,10 @@ public abstract class Tower : MonoBehaviour, IInteractable
         } else if (inventory.getInventoryType() != InventoryItem.TOWER) {
             if (this.fillCount() < 3) {
                 this.onRepair(inventory.getInventoryType());
-                inventory.consumed();
             } else {
                 this.reload();
             }
+            inventory.consumed();
         }
         return null;
     }
