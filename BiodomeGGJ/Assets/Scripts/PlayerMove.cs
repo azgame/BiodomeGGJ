@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+
+    public  bool isRight;
+    public bool isLeft;
+    public Animator anim;
+
     // Components
     Rigidbody m_rb;
 
