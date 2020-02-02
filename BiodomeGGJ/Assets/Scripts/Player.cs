@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     // Components
     PlayerMove m_moveComponent;
     PlayerInputActions m_inputActions;
-
+    Rigidbody rb;
     public GameObject holdSpace;
     IInteractable nearInteractable;
 
@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
         m_moveComponent = GetComponent<PlayerMove>();
         isPushed = false;
         dashTimer = 0;
+        rb = GetComponent<Rigidbody>();
     }
 
 
@@ -91,6 +92,8 @@ public class Player : MonoBehaviour
             Vector3 collisionDir = this.transform.position - otherPos;
             m_moveComponent.Move(collisionDir, 1.0f);
             isPushed = true;
+            
+            
         }
     }
 
