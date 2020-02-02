@@ -347,11 +347,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6704321e5716dcd449c3bf24561c46e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRight: 0
-  isLeft: 0
+  isFacingRight: 1
+  isFacingLeft: 0
   anim: {fileID: 2269839918388787020}
-  m_speed: 10
-  m_dashSpeed: 10
+  m_speed: 20
+  m_dashSpeed: 20
 --- !u!136 &6510510284763604166
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -135,8 +135,10 @@ public class GameManager : MonoBehaviour
         }
 
         if (numRounds == 0)
+        {
             Debug.Log("You win");
-
+            Application.Quit();
+        }
     }
 
     public void BaseDamage(int damage)
