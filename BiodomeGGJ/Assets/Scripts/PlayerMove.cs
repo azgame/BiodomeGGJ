@@ -6,8 +6,8 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
 
-    public  bool isRight;
-    public bool isLeft;
+    public  bool isFacingRight = true;
+    public bool isFacingLeft;
     public Animator anim;
 
     // Components
@@ -27,6 +27,12 @@ public class PlayerMove : MonoBehaviour
         m_rb = this.gameObject.GetComponent<Rigidbody>();
     }
 
+
+     void Update()
+    {
+        
+    }
+
     public void Move(Vector2 moveDir_, float dash_)
     {
         Vector3 dash = new Vector3(moveDir_.x * dash_ * m_dashSpeed, 0.0f, moveDir_.y * dash_ * m_dashSpeed);
@@ -34,4 +40,18 @@ public class PlayerMove : MonoBehaviour
         m_rb.velocity = move;
         m_rb.AddForce(dash, ForceMode.Impulse);
     }
+
+
+
+    public void  Flip(){
+
+        isFacingRight = !isFacingRight;
+
+        Vector3 localscale = gameObject.transform.localScale;
+        localscale.x *= -1;
+        transform.localScale = localscale;
+
+
+    }
+
 }
